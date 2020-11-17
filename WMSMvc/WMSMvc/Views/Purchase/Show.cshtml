@@ -1,0 +1,279 @@
+﻿
+@{
+    ViewData["Title"] = "Show";
+    Layout = null;
+}
+
+<link href="~/js/ElementUI/element-ui.css" rel="stylesheet" />
+<div id="bb">
+    <span>采购订单号：</span><el-input v-model="aaa" placeholder="请输入" style="width:200px"></el-input>
+    <span>供应商：</span><el-input v-model="bbb" placeholder="请输入" style="width:200px"></el-input>
+    <span class="demonstration">采购日期</span>
+    <el-date-picker v-model="value1"
+                    type="daterange"
+                    range-separator="至"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期">
+    </el-date-picker>
+    <el-button type="primary" v-on:click="Show()" icon="el-icon-search">搜索</el-button>
+    <el-button type="primary" v-on:click="Add()" icon="el-icon-search">添加采购单</el-button>
+
+    <template>
+        <el-table :data="tableData"
+                  style="width: 100%">
+            <el-table-column prop="purchaseId"
+                             label="序号"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="purchaseNum"
+                             label="采购单号"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="supplierName"
+                             label="供应商"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="purchaseTime"
+                             label="采购日期"
+                             width="190">
+            </el-table-column>
+            <el-table-column prop="purchaseName"
+                             label="采购人员"
+                             width="180">
+            </el-table-column>
+            <el-table-column label="采购状态"
+                             width="180">
+                <template slot-scope="scope">
+                    <p v-if="scope.row.purchaseState==0">未采购</p>
+                    <p v-if="scope.row.purchaseState==1">已采购</p>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <span v-if="scope.row.purchaseState==0">
+                        <el-button v-on:click="" size="mini" type="primary">采购</el-button>
+                    </span>
+                    <span v-if="scope.row.purchaseState==1">
+                        <el-button v-on:click="" size="mini" type="primary">已采购</el-button>
+                    </span>
+                    <el-button v-on:click="Xiangqing(scope.row)" size="mini" type="primary">任务详情</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+        
+        <el-pagination v-on:size-change="handleSizeChange"
+                       v-on:current-change="handleCurrentChange"
+                       :current-page="pageIndex"
+                       :page-sizes="[3, 10, 15, 20]"
+                       :page-size="100"
+                       layout="total, sizes, prev, pager, next, jumper"
+                       :total="totalCount">
+        </el-pagination>
+        
+    </template>
+    <el-dialog title="新增" :visible.sync="addFormVisible">
+        <el-form>
+
+
+            <el-form-item label="供应商">
+                <el-select v-model="form.pileData" v-on:change="selectChange1" placeholder="请选择供应商">
+                    <el-option v-for="pile in piles"
+                               :key="pile.supplierId"
+                               :label="pile.supplierName"
+                               :value="pile.supplierId">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="商品">
+                <el-select v-model="form.GoodData" v-on:change="selectChange2" multiple placeholder="请选择商品">
+                    <el-option v-for="good in goods"
+                               :key="good.oneIdd"
+                               :label="good.gWname"
+                               :value="good.oneIdd">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+        </el-form>
+        <div>
+            <el-button v-on:click="cancel()">取消</el-button>
+            <el-button type="primary" v-on:click="sumbitAddRow()">确定</el-button>
+        </div>
+
+    </el-dialog>
+    <el-dialog title="查看详情" :visible.sync="XiangFormVisible">
+        
+            <template>
+                <el-table :data="tableData2"
+                          style="width: 100%">
+                    <el-table-column prop="gWname"
+                                     label="商品名称"
+                                     width="180">
+                    </el-table-column>
+                    <el-table-column prop="specification"
+                                     label="商品规格"
+                                     width="180">
+                    </el-table-column>
+                    <el-table-column prop="twOsum"
+                                     label="商品数量"
+                                     width="180">
+                    </el-table-column>
+                    </el-table>
+                    </template>
+      
+        <div>
+            <el-button v-on:click="cancel()">取消</el-button>
+            <el-button type="primary" v-on:click="sumbitXiangRow()">确定</el-button>
+        </div>
+    </el-dialog>
+</div>
+<script src="~/js/vue.min.js"></script>
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/ElementUI/element-ui.js"></script>
+<script>
+    var Vue = new Vue({
+        el: "#bb",
+        data: {
+            tableData: '',
+            tableData2: '',
+            addFormVisible: false,
+            XiangFormVisible: false,
+            aaa: '',
+            bbb: '',
+            value1: '',
+            piles: '',
+            goods: '',
+            form: {
+                goodData: '',
+                plieData: '',
+                good: '',
+                job: '',
+                file: '',
+
+
+            },
+            a: '',
+            b: '',
+            XId:'',
+            pageIndex: 1,
+            pageSize: 3,
+            totalCount: 11,
+        },
+        methods: {
+            Show() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/shows?aaa=' + this.aaa + '&bbb=' + this.bbb + '&times=' + this.value1 + '&pageIndex=' + this.pageIndex + '&pageSize=' + this.pageSize)
+                    .then(response => { this.tableData = response.data.purchase_list, this.totalCount = response.data.totalCount })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            },
+            //初始页pageIndex、初始每页数据pageSize和数据data
+            handleSizeChange: function (size) {
+                this.pageSize = size;
+                console.log(this.pageSize)//每页下拉
+                this.Show(this.pageSize);
+            },
+            handleCurrentChange: function (pageIndex) {
+                this.pageIndex = pageIndex;
+                console.log(this.pageIndex);
+                this.Show(this.pageIndex);
+            },
+            
+            sumbitAddRow() {
+                
+                axios({
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    dataType:"json",
+                    url: 'http://localhost:3687/api/AddPurchae',
+                    method: 'post',
+                    data: { "PurchaseSupplierId": this.a, "PurchaseGoodsId": Number(this.b)},
+                    })
+                    .then((response) => {
+                        if (response.data > 0) {
+                            this.addFormVisible = false;
+                            this.$message({
+                                type: "success",
+                                message: "添加成功！"
+                            })
+                            this.Show()
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            },
+            selectChange1(supplierId) {
+                obj = this.piles.find((file) => {
+                    return file.supplierId == supplierId;
+                });
+                console.log(supplierId);
+                this.a = supplierId;
+            },
+            selectChange2(oneIdd) {
+                obj1 = this.goods.find((good) => {
+                    return good.oneIdd == oneIdd;
+                });
+                console.log(oneIdd);
+                this.b = oneIdd;
+            },
+            getPiles() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/showsupplier')
+                    .then(function (res) {
+                        _this.piles = res.data
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            getGoods() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/showex_goodstwo')
+                    .then(function (res) {
+                        _this.goods = res.data
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+
+            Add() {
+                    this.addFormVisible = true
+            },
+            Xiangqing(row) {
+                this.XId = row.purchaseId,
+                    console.log(this.XId);
+                this.show2();
+                this.XiangFormVisible = true
+                
+            },
+            show2() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/showsId?id=' + this.XId)
+                    .then(function (res) {
+                        console.log(res);
+                        _this.tableData2 = res.data
+                       
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            
+        },
+        mounted() {
+            this.Show(this.pageIndex);
+            this.getPiles();
+                this.getGoods()
+        }
+    })
+</script>
+

@@ -6007,11 +6007,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\T\\Desktop\\WMSMvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
+      "projectUniqueName": "C:\\Users\\T\\Desktop\\mvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
       "projectName": "WMSMvc",
-      "projectPath": "C:\\Users\\T\\Desktop\\WMSMvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
+      "projectPath": "C:\\Users\\T\\Desktop\\mvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
       "packagesPath": "C:\\Users\\T\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\T\\Desktop\\WMSMvc\\WMSMvc\\WMSMvc\\obj\\",
+      "outputPath": "C:\\Users\\T\\Desktop\\mvc\\WMSMvc\\WMSMvc\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

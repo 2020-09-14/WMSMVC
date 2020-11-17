@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+    Layout = null;
+}
+<link href="~/js/ElementUI/element-ui.css" rel="stylesheet" />
+
+<div id="div1">
+    <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="采购单号">
+            <el-input v-model="form.name"></el-input>
+        </el-form-item>
+        <el-form-item label="供应商">
+            <el-select v-model="form.pileData" change="selectChange" placeholder="请选择供应商">
+                <el-option v-for="pile in piles"
+                           :key="pile.supplierId"
+                           :label="pile.supplierName"
+                           :value="pile.supplierId">
+                </el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="商品">
+            <el-select v-model="form.GoodData" change="selectChange" multiple  placeholder="请选择商品">
+                <el-option v-for="good in goods"
+                           :key="good.oneIdd"
+                           :label="good.gWname"
+                           :value="good.oneIdd">
+                </el-option>
+            </el-select>
+        </el-form-item>
+    
+        <el-form-item>
+            <el-button type="primary" click="onSubmit">立即创建</el-button>
+            <el-button>取消</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+<script src="~/js/vue.min.js"></script>
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/ElementUI/Index.js"></script>
+<script>
+    
+    var Vue = new Vue({
+        el:"#div1",
+    
+        data: {
+            piles: '',
+            goods:'',
+            form: {
+                goodData:'',
+                plieData: '',
+                good:'',
+                job: '',
+                file:'',
+                name: '',
+            
+            }
+        },
+        methods: {
+            getPiles() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/showsupplier')
+                    .then(function (res) {
+                        _this.piles = res.data
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            getGoods() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/showex_goodstwo')
+                    .then(function (res) {
+                        _this.goods = res.data
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+             onSubmit() {
+                console.log('submit!');
+            }
+        },
+    
+        mounted() {
+            this.getPiles(),
+            this.getGoods()
+        }
+    
+    })
+        
+</script>
+
+

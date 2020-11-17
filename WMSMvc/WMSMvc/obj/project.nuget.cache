@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/cbsqWc+ip3Jr+C4q5cN5zc3gUxtZvAr4zYKLZsjuJ9oT2YkooW2aNVYwJH9zAJRgZVtCvRITbGoe2wH/YEzQg==",
+  "dgSpecHash": "LCdvHr8crFvB5U1vhmbwW/bXomwJBkf+QjSyGlann7yiBDbctFH5n9noNpXgOUjLNKpeEiXerKeP8Psibq63oA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\T\\Desktop\\WMSMvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
+  "projectFilePath": "C:\\Users\\T\\Desktop\\mvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\T\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\T\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
