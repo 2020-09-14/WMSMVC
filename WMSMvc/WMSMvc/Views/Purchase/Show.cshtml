@@ -51,7 +51,7 @@
             <el-table-column label="操作">
                 <template slot-scope="scope">
                     <span v-if="scope.row.purchaseState==0">
-                        <el-button v-on:click="" size="mini" type="primary">采购</el-button>
+                        <el-button v-on:click="Caigou(scope.row)" size="mini" type="primary">采购</el-button>
                     </span>
                     <span v-if="scope.row.purchaseState==1">
                         <el-button v-on:click="" size="mini" type="primary">已采购</el-button>
@@ -120,10 +120,7 @@
                     </el-table>
                     </template>
       
-        <div>
-            <el-button v-on:click="cancel()">取消</el-button>
-            <el-button type="primary" v-on:click="sumbitXiangRow()">确定</el-button>
-        </div>
+     
     </el-dialog>
 </div>
 <script src="~/js/vue.min.js"></script>
@@ -153,7 +150,8 @@
             },
             a: '',
             b: '',
-            XId:'',
+            XId: '',
+            CId:'',
             pageIndex: 1,
             pageSize: 3,
             totalCount: 11,
@@ -193,7 +191,8 @@
                     data: { "PurchaseSupplierId": this.a, "PurchaseGoodsId": Number(this.b)},
                     })
                     .then((response) => {
-                        if (response.data > 0) {
+                        console.log(response);
+                        if (response.data == true) {
                             this.addFormVisible = false;
                             this.$message({
                                 type: "success",
@@ -267,6 +266,29 @@
                         console.log(error);
                     });
             },
+            Caigou(row) {
+                this.CId = row.purchaseId
+                axios.get('http://localhost:3687/api/CaiState?ids=' + this.CId)
+                    .then((response) => {
+                        if (response.data == true) {
+                            
+                            this.$message({
+                                type: "success",
+                                message: "采购成功！"
+                             
+                            })
+                            setTimeout(this.loca(),"5000")
+                          
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            },
+            loca() {
+                window.location.href = "/Purchase/Todo"
+            }
             
         },
         mounted() {

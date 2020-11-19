@@ -16,5 +16,9 @@ namespace WMSMvc.Controllers
         {
             return View();
         }
+        public ActionResult Todo()
+        {
+            return View();
+        }
     }
 }

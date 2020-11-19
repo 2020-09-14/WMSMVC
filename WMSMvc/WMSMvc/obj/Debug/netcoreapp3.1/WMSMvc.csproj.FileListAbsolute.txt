@@ -222,3 +222,4 @@ C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\WMSMvc.pdb
 C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\WMSMvc.genruntimeconfig.cache
 C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Show.cshtml.g.cs
 C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Add.cshtml.g.cs
+C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Todo.cshtml.g.cs
