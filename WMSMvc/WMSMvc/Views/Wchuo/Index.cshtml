@@ -1,0 +1,165 @@
+﻿@{
+
+    Layout = null;
+
+}
+<link href="~/js/ElementUI/element-ui.css" rel="stylesheet" />
+<div id="tb">
+    <span>采购订单号：</span><el-input v-model="aaa" placeholder="请输入" style="width:200px"></el-input>
+    <span>供应商：</span><el-input v-model="bbb" placeholder="请输入" style="width:200px"></el-input>
+    <span class="demonstration">采购日期</span>
+    <el-date-picker v-model="value1"
+                    type="daterange"
+                    range-separator="至"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期">
+    </el-date-picker>
+    <el-button type="primary" v-on:click="Show()" icon="el-icon-search">搜索</el-button>
+    <template>
+        <el-table :data="tableData"
+                  style="width: 100%">
+            <el-table-column prop="shCoding"
+                             label="编号"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="createtime"
+                             label="任务下达时间"
+                             width="180">
+
+            </el-table-column>
+            <el-table-column prop="cause"
+                             label="出库原因"
+                             width="180">
+
+            </el-table-column>
+            <el-table-column prop=""
+                             label=""
+                             width="180">
+
+            </el-table-column>
+            <el-table-column label="出库状态"
+                             width="180">
+                <template slot-scope="scope">
+                    <p v-if="scope.row.state==0">已出库</p>
+                    <p v-if="scope.row.state==1">未出库</p>
+                </template>
+            </el-table-column>
+            <el-table-column prop="article"
+                             label="物品"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="shsum"
+                             label="任务数量"
+                             width="180">
+            </el-table-column>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button v-on:click="Xiangqing(scope.row)" size="mini" type="primary">任务详情</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+        <el-pagination v-on:size-change="handleSizeChange"
+                       v-on:current-change="handleCurrentChange"
+                       :current-page="pageIndex"
+                       :page-sizes="[3, 10, 15, 20]"
+                       :page-size="100"
+                       layout="total, sizes, prev, pager, next, jumper"
+                       :total="totalCount">
+        </el-pagination>
+    </template>
+    <el-dialog title="查看详情" :visible.sync="XiangFormVisible">
+
+        <template>
+            <el-table :data="tableData2"
+                      style="width: 100%">
+                <el-table-column prop="goCoding"
+                                 label="商品编号"
+                                 width="180">
+                </el-table-column>
+                <el-table-column prop="goName"
+                                 label="商品名称"
+                                 width="180">
+                </el-table-column>
+                <el-table-column prop="gosum"
+                                 label="商品数量"
+                                 width="180">
+                </el-table-column>
+                <el-table-column prop="goSpecification"
+                                 label="规格"
+                                 width="180">
+                </el-table-column>
+            </el-table>
+        </template>
+
+        <div>
+            <el-button v-on:click="cancel()">取消</el-button>
+            <el-button type="primary" v-on:click="sumbitXiangRow()">确定</el-button>
+        </div>
+    </el-dialog>
+</div>
+<script src="~/js/vue.min.js"></script>
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/ElementUI/Index.js"></script>
+<script>
+    new Vue({
+        el: "#tb",
+        data: {
+            tableData: '',
+            editFormVisible: false,
+            XiangFormVisible: false,//是否显示编辑窗口
+            formLabelWidth: '120px',
+            pageIndex: 1,
+            pageSize: 3,
+            totalCount: 11,
+            tableData2: '',
+            aaa: '',
+            bbb: '',
+            value1: '',
+        },
+        methods: {
+            Show() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/Rshow?pageIndex=' + this.pageIndex + '&pageSize=' + this.pageSize + '&aaa=' + this.aaa + "&time=" + this.value1)
+                    .then(response => { this.tableData = response.data.eX_Renwus_list, this.totalCount = response.data.totalCount })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            //初始页pageIndex、初始每页数据pageSize和数据data
+            handleSizeChange: function (size) {
+                this.pageSize = size;
+                console.log(this.pageSize)//每页下拉
+                this.Show(this.pageSize);
+            },
+            handleCurrentChange: function (pageIndex) {
+                this.pageIndex = pageIndex;
+                console.log(this.pageIndex);
+                this.Show(this.pageIndex);
+            },
+            Xiangqing(row) {
+                this.XId = row.shipmentId,
+                    console.log(this.XId);
+                this.show2();
+                this.XiangFormVisible = true
+
+            },
+            show2() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/Ex_GoodsShow?ids=' + this.XId)
+                    .then(function (res) {
+                        console.log(res);
+                        _this.tableData2 = res.data
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+        },
+        mounted() {
+            this.Show();
+        }
+    })
+</script>

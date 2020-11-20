@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\T\\Desktop\\mvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj": {}
+    "C:\\Users\\86176\\Desktop\\WMA_mvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj": {}
   },
   "projects": {
-    "C:\\Users\\T\\Desktop\\mvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj": {
+    "C:\\Users\\86176\\Desktop\\WMA_mvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\T\\Desktop\\mvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
+        "projectUniqueName": "C:\\Users\\86176\\Desktop\\WMA_mvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
         "projectName": "WMSMvc",
-        "projectPath": "C:\\Users\\T\\Desktop\\mvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
-        "packagesPath": "C:\\Users\\T\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\T\\Desktop\\mvc\\WMSMvc\\WMSMvc\\obj\\",
+        "projectPath": "C:\\Users\\86176\\Desktop\\WMA_mvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
+        "packagesPath": "C:\\Users\\86176\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\86176\\Desktop\\WMA_mvc\\WMSMvc\\WMSMvc\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\T\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\86176\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

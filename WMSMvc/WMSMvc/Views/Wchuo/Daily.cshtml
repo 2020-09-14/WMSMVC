@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "Daily";
+}
+
+<h1></h1>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+ 
+</script>
+<table class="table-bordered" style="width:300px">
+    <tr align="center" valign="middle" style="background:red" >
+        <th>日报表生成单</th>
+    </tr>
+    <tbody id="tb">
+
+    </tbody>
+
+</table>
+<script>
+    $(function () {
+        Show();
+    })
+    function Show() {
+        $.ajax({
+            url: 'http://localhost:3687/api/Daily',
+            type: "get",
+            dataType: 'json',
+            success: function (d) {
+                $(d).each(function () {
+                    var line = '<tr align="center" valign="middle"><td><a href="#" onclick="">' + this.pname + '</a></td></tr>'
+                    $('#tb').append(line);
+                })
+            }
+        })
+    }
+</script>
