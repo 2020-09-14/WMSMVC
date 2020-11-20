@@ -37,6 +37,7 @@
     </el-date-picker>
     <span>调拨单号：</span><el-input v-model="ccc" placeholder="请输入" style="width:200px"></el-input>
     <el-button type="primary" v-on:click="Show()" icon="el-icon-search">搜索</el-button>
+    <el-button type="primary" v-on:click="aa()" icon="el-icon-search">补货</el-button>
     <template>
         <el-table :data="tableData"
                   style="width: 100%">
@@ -133,6 +134,18 @@
                 console.log(this.pageIndex);
                 this.Show(this.pageIndex);
             },
+            aa() {
+                axios
+                    .get(location.href = "/Allot/Details")
+                    .then(function (res) {
+                        console.log(res);
+                        _this.tableData2 = res.data
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         },
         mounted() {
             this.Show(this.pageIndex);
