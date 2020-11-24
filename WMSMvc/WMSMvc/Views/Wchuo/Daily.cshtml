@@ -1,37 +1,177 @@
 ﻿
-@{
-    ViewData["Title"] = "Daily";
-}
+<!DOCTYPE html>
+<html>
 
-<h1></h1>
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script>
- 
-</script>
-<table class="table-bordered" style="width:300px">
-    <tr align="center" valign="middle" style="background:red" >
-        <th>日报表生成单</th>
-    </tr>
-    <tbody id="tb">
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script>
+        //打印表格
+        var idTmr;
 
-    </tbody>
-
-</table>
-<script>
-    $(function () {
-        Show();
-    })
-    function Show() {
-        $.ajax({
-            url: 'http://localhost:3687/api/Daily',
-            type: "get",
-            dataType: 'json',
-            success: function (d) {
-                $(d).each(function () {
-                    var line = '<tr align="center" valign="middle"><td><a href="#" onclick="">' + this.pname + '</a></td></tr>'
-                    $('#tb').append(line);
-                })
+        function getExplorer() {
+            var explorer = window.navigator.userAgent;
+            //ie
+            if (explorer.indexOf("MSIE") >= 0) {
+                return 'ie';
             }
+            //firefox
+            else if (explorer.indexOf("Firefox") >= 0) {
+                return 'Firefox';
+            }
+            //Chrome
+            else if (explorer.indexOf("Chrome") >= 0) {
+                return 'Chrome';
+            }
+            //Opera
+            else if (explorer.indexOf("Opera") >= 0) {
+                return 'Opera';
+            }
+            //Safari
+            else if (explorer.indexOf("Safari") >= 0) {
+                return 'Safari';
+            }
+        }
+
+        function method5(tableid) {
+
+           
+            if (getExplorer() == 'ie') {
+                var curTbl = document.getElementById(tableid);
+                var oXL = new ActiveXObject("Excel.Application");
+                var oWB = oXL.Workbooks.Add();
+                var xlsheet = oWB.Worksheets(1);
+                var sel = document.body.createTextRange();
+                sel.moveToElementText(curTbl);
+                sel.select();
+                sel.execCommand("Copy");
+                xlsheet.Paste();
+                oXL.Visible = true;
+
+                try {
+                    var fname = oXL.Application.GetSaveAsFilename("Excel.xls",
+                        "Excel Spreadsheets (*.xls), *.xls");
+                } catch (e) {
+                    print("Nested catch caught " + e);
+                } finally {
+                    oWB.SaveAs(fname);
+                    oWB.Close(savechanges = false);
+                    oXL.Quit();
+                    oXL = null;
+                    idTmr = window.setInterval("Cleanup();", 1);
+                }
+
+            } else {
+                tableToExcel(tableid)
+            }
+        }
+
+        function Cleanup() {
+            window.clearInterval(idTmr);
+            CollectGarbage();
+        }
+        var tableToExcel = (function () {
+            var uri = 'data:application/vnd.ms-excel;base64,',
+                template = '<html><head><meta charset="UTF-8"></head><body><table  border="1">{table}</table></body></html>',
+                base64 = function (
+                    s) {
+                    return window.btoa(unescape(encodeURIComponent(s)))
+                },
+                format = function (s, c) {
+                    return s.replace(/{(\w+)}/g, function (m, p) {
+                        return c[p];
+                    })
+                }
+            return function (table, name) {
+                if (!table.nodeType)
+                    table = document.getElementById(table)
+                var ctx = {
+                    worksheet: name || 'Worksheet',
+                    table: table.innerHTML
+                }
+                window.location.href = uri + base64(format(template, ctx))
+            }
+        })()
+    </script>
+</head>
+<body>
+    <div class="tools">
+        <button type="button" class="btn green" id="excell" onclick="method5('dataTable')">导出考勤表格</button>
+    </div>
+    <table class="table-bordered" style="width:300px">
+        <tr align="center" valign="middle" style="background:red">
+            <th>日报表生成单</th>
+        </tr>
+        <tbody id="tb">
+        </tbody>
+
+    </table>
+
+    <table class="table table-bordered" border="1" id="dataTable">
+        <tr>
+            <td>商品编号</td>
+            <td>任务下达时间</td>
+            <td>出库原因</td>
+            <td>出库状态</td>
+            <td>物品</td>
+            <td>任务数量</td>
+        </tr>
+        <tbody id="tbb">
+        </tbody>
+    </table>
+    <input type="hidden" id="hi" value="0" />
+</body>
+    </html>
+
+   
+
+    <script>
+        $(function () {
+            Show();
         })
-    }
-</script>
+        function Zeng() {
+            var count = $("#hi").val();
+            $("#hi").val(Number(Number(count) + 1));
+        }
+        function Show() {
+            $.ajax({
+                url: 'http://localhost:3687/api/Daily',
+                type: "get",
+                dataType: 'json',
+                success: function (d) {
+                    $(d).each(function () {
+                        var line = '<tr align="center" valign="middle"><td><a href="#" onclick="Show1(' + $('#hi').val() + ')">' + this.pname + '</a>  <input type="hidden" id="Ex' + $('#hi').val() + '" value="' + this.pname + '" /></td></tr>'
+                        Zeng();
+                        $('#tb').append(line);
+                        
+                    })
+                }
+            })
+        }
+       
+        function Show1(naer) {
+
+            var time = $("#Ex" + naer).val();
+            $.ajax({
+                url: 'http://localhost:3687/api/Daily2?time=' + time,
+                type: "get",
+                dataType: 'json',
+                success: function (d) {
+                    $(d).each(function () {
+                        var line = '<tr>'
+                            + '<td>' + this.shCoding + '</td>'
+                            + '<td>' + this.createtime + '</td>'
+                            + '<td>' + this.cause + '</td>'
+                            + '<td>' + (this.state = 1 ? "未出库" :"已出库") + '</td>'
+                            + '<td>' + this.article + '</td>'
+                            + '<td>' + this.shsum + '</td>'
+                            +'</tr>'
+                        $('#tbb').append(line);
+                    
+                    })
+                 
+                }
+            })
+        }
+    </script>

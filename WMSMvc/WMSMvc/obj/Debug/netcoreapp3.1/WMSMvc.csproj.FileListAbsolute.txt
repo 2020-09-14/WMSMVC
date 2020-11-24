@@ -462,3 +462,9 @@ E:\大二项目\WMSMVC\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Wchuo\A
 E:\大二项目\WMSMVC\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Wchuo\CeshiAdd.cshtml.g.cs
 E:\大二项目\WMSMVC\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Wchuo\Daily.cshtml.g.cs
 E:\大二项目\WMSMVC\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Wchuo\Index.cshtml.g.cs
+C:\Users\86176\Desktop\WMA_mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\AllotShow.cshtml.g.cs
+C:\Users\86176\Desktop\WMA_mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\AuditShow.cshtml.g.cs
+C:\Users\86176\Desktop\WMA_mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\Details.cshtml.g.cs
+C:\Users\86176\Desktop\WMA_mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\ItemdetailShow.cshtml.g.cs
+C:\Users\86176\Desktop\WMA_mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\LookShow.cshtml.g.cs
+C:\Users\86176\Desktop\WMA_mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\WMSMvc.csprojAssemblyReference.cache
