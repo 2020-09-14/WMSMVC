@@ -698,4 +698,3 @@ F:\项目\常少楠11\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\It
 F:\项目\常少楠11\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\LookShow.cshtml.g.cs
 F:\项目\常少楠11\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Wchuo\Daily.cshtml.g.cs
 F:\项目\常少楠11\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Wchuo\Index.cshtml.g.cs
-F:\项目\常少楠11\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\WMSMvc.csprojAssemblyReference.cache
