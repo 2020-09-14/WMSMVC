@@ -34,7 +34,7 @@ namespace WMSMvc
             }
             else
             {
-                app.UseExceptionHandler("/Muban/Index");
+                app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
 
@@ -46,7 +46,7 @@ namespace WMSMvc
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Muban}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

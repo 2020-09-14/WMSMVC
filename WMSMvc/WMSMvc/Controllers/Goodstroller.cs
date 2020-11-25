@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WMSMvc.Controllers
 {
-    public class MubanController : Controller
+    public class Goodstroller : Controller
     {
         public IActionResult Index()
         {
@@ -14,4 +14,3 @@ namespace WMSMvc.Controllers
         }
     }
 }
- 
