@@ -667,10 +667,11 @@ C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\WMSMvc.dll
 C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\WMSMvc.pdb
 C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\WMSMvc.genruntimeconfig.cache
 C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Show.cshtml.g.cs
-C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Add.cshtml.g.cs
 E:\大二项目\WMSMVC\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Add.cshtml.g.cs
 E:\大二项目\WMSMVC\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Show.cshtml.g.cs
 C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Todo.cshtml.g.cs
+C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Ruku.cshtml.g.cs
+C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Xiangqing.cshtml.g.cs
 E:\大二项目\WMSMVC\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Purchase\Todo.cshtml.g.cs
 E:\大二项目\WMSMVC\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\AllotShow.cshtml.g.cs
 E:\大二项目\WMSMVC\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\ItemdetailShow.cshtml.g.cs
@@ -698,3 +699,11 @@ F:\项目\常少楠11\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\It
 F:\项目\常少楠11\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\LookShow.cshtml.g.cs
 F:\项目\常少楠11\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Wchuo\Daily.cshtml.g.cs
 F:\项目\常少楠11\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Wchuo\Index.cshtml.g.cs
+C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\AllotShow.cshtml.g.cs
+C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\AuditShow.cshtml.g.cs
+C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\Details.cshtml.g.cs
+C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\ItemdetailShow.cshtml.g.cs
+C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Allot\LookShow.cshtml.g.cs
+C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Goodstroller\Index.cshtml.g.cs
+C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Wchuo\Daily.cshtml.g.cs
+C:\Users\T\Desktop\mvc\WMSMvc\WMSMvc\obj\Debug\netcoreapp3.1\Razor\Views\Wchuo\Index.cshtml.g.cs

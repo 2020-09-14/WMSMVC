@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewData["Title"] = "Xiangqing";
+    Layout = null;
+}
+
+<link href="~/js/ElementUI/element-ui.css" rel="stylesheet" />
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div id="bb">
+    <input type="hidden" value="@ViewBag.Is" id="hidden" />
+    <template>
+        <el-table :data="tableData"
+                  style="width: 100%">
+            <el-table-column prop="godownTodoId"
+                             label="序号"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="gWname"
+                             label="产品名称"
+                             width="210">
+            </el-table-column>
+            <el-table-column prop="specification"
+                             label="计量单位"
+                             width="210">
+            </el-table-column>
+            <el-table-column prop="twOsum"
+                             label="数量"
+                             width="190">
+            </el-table-column>
+
+            <el-table-column label="入库状态"
+                             width="180">
+                <template slot-scope="scope">
+                    <p v-if="scope.row.godownTodoState==0">未入库</p>
+                    <p v-if="scope.row.godownTodoState==1">部分入库</p>
+                    <p v-if="scope.row.godownTodoState==2">已入库</p>
+                </template>
+            </el-table-column>
+
+        </el-table>
+        <el-pagination v-on:size-change="handleSizeChange"
+                       v-on:current-change="handleCurrentChange"
+                       :current-page="pageIndex"
+                       :page-sizes="[3, 10, 15, 20]"
+                       :page-size="100"
+                       layout="total, sizes, prev, pager, next, jumper"
+                       :total="totalCount">
+        </el-pagination>
+    </template>
+
+
+</div>
+<script src="~/js/vue.min.js"></script>
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/ElementUI/element-ui.js"></script>
+<script>
+    var Vue = new Vue({
+        el: "#bb",
+        data: {
+            tableData: '',
+            pageIndex: 1,
+            pageSize: 3,
+            totalCount: 11,
+      
+        },
+        methods: {
+            Show() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/GetGodown?' + 'pageIndex=' + this.pageIndex + '&pageSize=' + this.pageSize )
+                    .then(response => { this.tableData = response.data.purchase_list ,this.totalCount = response.data.totalCount  })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            },  
+            handleSizeChange: function (size) {
+                this.pageSize = size;
+                console.log(this.pageSize)//每页下拉
+                this.Show(this.pageSize);
+            },
+            handleCurrentChange: function (pageIndex) {
+                this.pageIndex = pageIndex;
+                console.log(this.pageIndex);
+                this.Show(this.pageIndex);
+            },
+        },
+        mounted() {
+            this.Show();
+           
+      
+        }
+    })
+</script>
+
+
+
+
+
