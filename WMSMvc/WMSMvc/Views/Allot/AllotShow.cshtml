@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewData["Title"] = "AllotShow";
+    Layout = null;
+}
+<link href="~/js/ElementUI/element-ui.css" rel="stylesheet" />
+<h6>调拨单列表</h6>
+<div id="bb">
+    <span class="de"></span>
+    <el-form-item label="调出仓库">
+        <el-select v-model="outregion" placeholder="请选择仓库">
+            <el-option label="仓库一" value="shanghai"></el-option>
+            <el-option label="仓库二" value="beijing"></el-option>
+        </el-select>
+    </el-form-item>
+    <el-form-item label="调入仓库">
+        <el-select v-model="inregion" placeholder="全部">
+            <el-option label="仓库一" value="shanghai"></el-option>
+            <el-option label="仓库二" value="beijing"></el-option>
+        </el-select>
+    </el-form-item>
+    <span>商品名称：</span><el-input v-model="aaa" placeholder="请输入" style="width:200px"></el-input>
+    <span>商品编码：</span><el-input v-model="bbb" placeholder="请输入" style="width:200px"></el-input>
+    <el-form-item label="审批状态">
+        <el-select v-model="State" placeholder="全部">
+            <el-option label="状态一" value="shanghai"></el-option>
+            <el-option label="状态二" value="beijing"></el-option>
+        </el-select>
+    </el-form-item>
+    <span class="demonstration">调拨日期</span>
+    <el-date-picker v-model="value1"
+                    type="daterange"
+                    range-separator="至"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期">
+    </el-date-picker>
+    <span>调拨单号：</span><el-input v-model="ccc" placeholder="请输入" style="width:200px"></el-input>
+    <el-button type="primary" v-on:click="Show()" icon="el-icon-search">搜索</el-button>
+    <el-button type="primary" v-on:click="Dy()" icon="el-icon-search">打印</el-button>
+    <template>
+        <el-table :data="tableData"
+                  style="width: 100%">
+            <el-table-column prop="aId"
+                             label="序号"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="aRequisition"
+                             label="调拨单号"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="aCallout"
+                             label="调出仓库"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="aFold"
+                             label="调入仓库"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="aPerson"
+                             label="调拨人"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="aDate"
+                             label="调拨日期"
+                             width="190">
+            </el-table-column>
+            <el-table-column prop="aAuditstatus"
+                             label="审核状态"
+                             width="180">
+                <template slot-scope="scope">
+                    <p v-if="scope.row.aAuditstatus==0">待审核</p>
+                    <p v-if="scope.row.aAuditstatus==1">已审核</p>
+                </template>
+            </el-table-column>
+            <el-table-column prop="aAllocatingstate"
+                             label="调拨状态"
+                             width="180">
+                <template slot-scope="scope">
+                    <p v-if="scope.row.aAllocatingstate==0">未出库</p>
+                    <p v-if="scope.row.aAllocatingstate==1">部分出库</p>
+                    <p v-if="scope.row.aAllocatingstate==2">已出库</p>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button v-on:click="aa()" size="mini" type="primary">任务详情</el-button>
+                </template>
+            </el-table-column>
+
+        </el-table>
+        <el-pagination v-on:size-change="handleSizeChange"
+                       v-on:current-change="handleCurrentChange"
+                       :current-page="pageIndex"
+                       :page-sizes="[3, 10, 15, 20]"
+                       :page-size="100"
+                       layout="total, sizes, prev, pager, next, jumper"
+                       :total="totalCount">
+        </el-pagination>
+    </template>
+</div>
+<script src="~/js/vue.min.js"></script>
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/ElementUI/element-ui.js"></script>
+<script>
+    var Vue = new Vue({
+        el: "#bb",
+        data: {
+            tableData: '',
+            tableData2: '',
+            addFormVisible: false,
+            XiangFormVisible: false,
+            outregion: '',
+            inregion: '',
+            State:'',
+            aaa: '',
+            bbb: '',
+            ccc: '',
+            value1: '',
+            region: '',
+            XId:'',
+            pageIndex: 1,
+            pageSize: 3,
+            totalCount: 11,
+        },
+        methods: {
+            Show() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/AllotShow?pageIndex=' + this.pageIndex + '&pageSize=' + this.pageSize)
+                    .then(response => { this.tableData = response.data.allot_list, this.totalCount = response.data.totalCount })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            },
+            //初始页pageIndex、初始每页数据pageSize和数据data
+            handleSizeChange: function (size) {
+                this.pageSize = size;
+                console.log(this.pageSize)//每页下拉
+                this.Show(this.pageSize);
+            },
+            handleCurrentChange: function (pageIndex) {
+                this.pageIndex = pageIndex;
+                console.log(this.pageIndex);
+                this.Show(this.pageIndex);
+            },
+        },
+        mounted() {
+            this.Show(this.pageIndex);
+        }
+    })
+
+    function Dy() {
+        window.print();
+    }
+    function aa() {
+        location.href = "/Allot/ItemdetailShow";
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

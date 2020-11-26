@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lenovo\\Desktop\\WMS项目\\MVC\\WMSMvc\\WMSMvc\\WMSMvc.csproj": {}
+    "E:\\大二项目\\WMSMVC\\WMSMvc\\WMSMvc\\WMSMvc.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lenovo\\Desktop\\WMS项目\\MVC\\WMSMvc\\WMSMvc\\WMSMvc.csproj": {
+    "E:\\大二项目\\WMSMVC\\WMSMvc\\WMSMvc\\WMSMvc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lenovo\\Desktop\\WMS项目\\MVC\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
+        "projectUniqueName": "E:\\大二项目\\WMSMVC\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
         "projectName": "WMSMvc",
-        "projectPath": "C:\\Users\\lenovo\\Desktop\\WMS项目\\MVC\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
-        "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lenovo\\Desktop\\WMS项目\\MVC\\WMSMvc\\WMSMvc\\obj\\",
+        "projectPath": "E:\\大二项目\\WMSMVC\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
+        "packagesPath": "C:\\Users\\MECHREVO\\.nuget\\packages\\",
+        "outputPath": "E:\\大二项目\\WMSMVC\\WMSMvc\\WMSMvc\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\MECHREVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
