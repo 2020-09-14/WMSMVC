@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewData["Title"] = "AddCheck";
+    Layout = null;
+
+}
+
+<link href="~/js/ElementUI/element-ui.css" rel="stylesheet" />
+
+<div id="div1">
+    <el-form ref="form" :model="form" label-width="80px">
+        <el-form-item label="任务名称">
+            <input id="Text1" type="text" style="width:120px;height:32px" />    
+        </el-form-item>
+
+        <el-form-item label="盘点库区">
+            <input id="Text1" type="text" style="width:120px;height:32px" />
+        </el-form-item>
+
+        <el-form-item label="默认盘点人">
+            <input id="Text1" type="text" style="width:120px;height:32px" />
+        </el-form-item>
+
+        <el-form-item label="盘点仓库">
+            <input id="Text1" type="text" style="width:120px;height:32px" />
+        </el-form-item>
+
+        <el-form-item label="盘点货架">
+            <input id="Text1" type="text" style="width:120px;height:32px" />
+        </el-form-item>
+
+        <el-form-item label="盘点时间">
+            <input id="Text1" type="text" style="width:120px;height:32px" />
+        </el-form-item>
+
+        <el-form-item label="盘点备注">
+            <input id="Text1" type="text" style="width:200px;height:32px" />
+        </el-form-item>
+
+        <el-form-item>
+            <el-button type="primary" click="onSubmit">生成盘点任务</el-button>
+            <el-button>取消</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+<script src="~/js/vue.min.js"></script>
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/ElementUI/Index.js"></script>
+<script>
+
+    var Vue = new Vue({
+        el:"#div1",
+
+        data: {
+            piles: '',
+            goods:'',
+            form: {
+                goodData:'',
+                plieData: '',
+                good:'',
+                job: '',
+                file:'',
+                name: '',
+
+            }
+        },
+        methods: {
+            getPiles() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/showsupplier')
+                    .then(function (res) {
+                        _this.piles = res.data
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            getGoods() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/showex_goodstwo')
+                    .then(function (res) {
+                        _this.goods = res.data
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+             onSubmit() {
+                console.log('submit!');
+            }
+        },
+
+        mounted() {
+            this.getPiles(),
+            this.getGoods()
+        }
+
+    })
+
+</script>
+

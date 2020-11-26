@@ -13,7 +13,7 @@
     <title>网站后台管理模版</title>
 
     <link href="~/static/admin/layui/css/layui.css" rel="stylesheet" />
-    <link href="~/static/admin/css/admin.css" rel="stylesheet" />、、
+    <link href="~/static/admin/css/admin.css" rel="stylesheet" />
     <link href="~/js/ElementUI/element-ui.css" rel="stylesheet" />
     <script src="~/js/ElementUI/element-ui.js"></script>
 
@@ -25,38 +25,36 @@
             <ul class="layui-nav layui-nav-tree" lay-filter="leftNav">
 
                 <li class="layui-nav-item">
+                    <a href="javascript:;">到货管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" data-url="/Ad/Index" data-id='1' data-text="到货登记"><span class="l-line"></span>到货登记</a></dd>
+                        <dd><a href="javascript:;" data-url="/Ad/Index2" data-id='2' data-text="快捷到货"><span class="l-line"></span>快捷到货</a></dd>
+                        <dd><a href="javascript:;" data-url="/Ad/Index1" data-id='3' data-text="到货记录"><span class="l-line"></span>到货记录</a></dd>
+                    </dl>
+
+                </li>
+                <li class="layui-nav-item">
                     <a href="javascript:;">入库业务</a>
                     <dl class="layui-nav-child">
-
                         <dd><a href="javascript:;" data-url="/Purchase/Show" data-id='32' data-text="采购入库"><span class="l-line"></span>采购入库</a></dd>
-                        <dd><a href="javascript:;" data-url="/Purchase/Xiangqing" data-id='4' data-text="入库明细"><span class="l-line"></span>入库明细</a></dd>
-                        <dd><a href="javascript:;" data-url="/Purchase/Todo" data-id='5' data-text="入库任务单"><span class="l-line"></span>入库任务单</a></dd>
-
-                 
-
+                        <dd><a href="javascript:;" data-url="/Reg/Add" data-id='4' data-text="入库明细"><span class="l-line"></span>入库明细</a></dd>
+                        <dd><a href="javascript:;" data-url="/Reg/Index" data-id='5' data-text="入库任务单"><span class="l-line"></span>入库任务单</a></dd>
                     </dl>
                 </li>
 
                 <li class="layui-nav-item">
                     <a href="javascript:;">出库管理</a>
                     <dl class="layui-nav-child">
-
                         <dd><a href="javascript:;" data-url="/ylyYaoPinKucun/yaolingshou" data-id='6' data-text="出库明细"><span class="l-line"></span>出库明细</a></dd>
                         <dd><a href="javascript:;" data-url="/ylyYaoPinKucun/yaolingshou" data-id='7' data-text="出库任务单"><span class="l-line"></span>出库任务单</a></dd>
-
-                        <dd><a href="javascript:;" data-url="/Wchuo/Daily" data-id='31' data-text="日报表导出"><span class="l-line"></span>日报表导出</a></dd>
-                        <dd><a href="javascript:;" data-url="/Wchuo/Index" data-id='6' data-text="出库任务"><span class="l-line"></span>出库任务</a></dd>
-                        <dd><a href="javascript:;" data-url="/Wchuo/Add" data-id='7' data-text="添加出库任务"><span class="l-line"></span>添加出库任务</a></dd>
-
                     </dl>
                 </li>
 
                 <li class="layui-nav-item">
                     <a href="javascript:;">调拨业务</a>
                     <dl class="layui-nav-child">
-
-                        <dd><a href="javascript:;" data-url="/Allot/AllotShow" data-id='8' data-text="调拨单列表"><span class="l-line"></span>调拨单列表</a></dd>
-                        <dd><a href="javascript:;" data-url="/Allot/AuditShow" data-id='9' data-text="调拨单审核"><span class="l-line"></span>调拨单审核</a></dd>
+                        <dd><a href="javascript:;" data-url="/Shoufei/Index" data-id='8' data-text="调拨单列表"><span class="l-line"></span>调拨单列表</a></dd>
+                        <dd><a href="javascript:;" data-url="/Shoufei/Index" data-id='9' data-text="调拨单审核"><span class="l-line"></span>调拨单审核</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -70,15 +68,7 @@
                     </dl>
                 </li>
 
-                <li class="layui-nav-item">
-                    <a href="javascript:;">报损管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" data-url="/ylyYaoPinKucun/Show" data-id='15' data-text="报损管理"><span class="l-line"></span>报损管理</a></dd>
-                        <dd><a href="javascript:;" data-url="/ylyYaoPinKucun/yaoRukushow" data-id='16' data-text="报损审核"><span class="l-line"></span>报损审核</a></dd>
-
-                    </dl>
-                </li>
-
+              
 
                 <li class="layui-nav-item">
                     <a href="javascript:;">前置仓补货管理</a>
@@ -93,9 +83,14 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">盘点管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" data-url="/EmployInfo/XtIndex" data-id='21' data-text="盘点任务"><span class="l-line"></span>盘点任务</a></dd>
-                        <dd><a href="javascript:;" data-url="/EmployInfo/Index" data-id='22' data-text="盘点审核"><span class="l-line"></span>盘点审核</a></dd>
-
+                        <dd><a href="javascript:;" data-url="/Check/AddCheck" data-id='22' data-text="添加盘点任务"><span class="l-line"></span>添加盘点任务</a></dd>
+                        <dd><a href="javascript:;" data-url="/Check/ShowCheck" data-id='21' data-text="预览盘点任务"><span class="l-line"></span>预览盘点任务</a></dd>
+                        <dd><a href="javascript:;" data-url="/Check/ShowCheckNo" data-id='22' data-text="盘点任务（未完成）"><span class="l-line"></span>盘点任务（未完成）</a></dd>
+                        <dd><a href="javascript:;" data-url="/Check/ShowCheckYes" data-id='22' data-text="盘点任务（已完成）"><span class="l-line"></span>盘点任务（已完成）</a></dd>
+                        <dd><a href="javascript:;" data-url="/Check/ShowCheckShi" data-id='21' data-text="盘点任务详情"><span class="l-line"></span>预览盘点任务</a></dd>
+                        <dd><a href="javascript:;" data-url="/Check/ShowCheckShiGai" data-id='21' data-text="修改盘点数量"><span class="l-line"></span>修改盘点数量</a></dd>
+                        <dd><a href="javascript:;" data-url="/Check/ShowCheckShiShen" data-id='21' data-text="审核"><span class="l-line"></span>审核</a></dd>
+                        <dd><a href="javascript:;" data-url="/Check/ShowCheckShiJie" data-id='21' data-text="审核结果"><span class="l-line"></span>审核结果</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">

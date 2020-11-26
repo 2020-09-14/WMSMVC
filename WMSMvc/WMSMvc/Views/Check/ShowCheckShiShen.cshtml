@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewData["Title"] = "ShowCheckShiShen";
+    Layout = null;
+}
+
+<link href="~/js/ElementUI/element-ui.css" rel="stylesheet" />
+
+<div id="bb">
+    <div>
+        <template>
+            <span style="color:darkseagreen">盘点任务名称： 成都A仓盘点</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color:darkseagreen">盘点仓库： 知识青白江仓库</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color:darkseagreen">盘点库区：C1、C2、C3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br />
+            <span style="color:darkseagreen">盘点日期： 2016-11-30 12：32</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br />
+            <span style="color:darkseagreen">盘点人： 张三</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color:darkseagreen">盘点备注：请及时盘点</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </template>
+    </div>
+    <template>
+        <el-table :data="tableData"
+                  style="width: 100%">
+            <el-table-column prop="checkTaskId"
+                             label="序号"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="coding"
+                             label="物品编码"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="productName"
+                             label="物品品类"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="gWname"
+                             label="物品名称"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="specification"
+                             label="物品规格"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="batchNumber"
+                             label="批次号"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="termOfValidity"
+                             label="有效期"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="goodsAllocation"
+                             label="货位"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="tWOsum"
+                             label="库存数量"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="checkNum"
+                             label="实盘数量"
+                             width="180">
+            </el-table-column>
+
+
+        </el-table>
+
+        <el-pagination v-on:size-change="handleSizeChange"
+                       v-on:current-change="handleCurrentChange"
+                       :current-page="pageIndex"
+                       :page-sizes="[3, 10, 15, 20]"
+                       :page-size="100"
+                       layout="total, sizes, prev, pager, next, jumper"
+                       :total="totalCount">
+        </el-pagination>
+
+    </template>
+
+
+</div>
+<br />
+<br />
+<span>审核意见</span>
+
+<textarea id="TextArea1" style="width:300px;height:60px" rows="2" cols="20"></textarea>
+
+<button>完成调整单</button>
+
+<script src="~/js/vue.min.js"></script>
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/ElementUI/element-ui.js"></script>
+<script>
+    var Vue = new Vue({
+        el: "#bb",
+        data: {
+            tableData: '',
+
+            pageIndex: 1,
+            pageSize: 3,
+            totalCount: 11,
+        },
+        methods: {
+            Show() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/CheckshowShi11?pageIndex=' + this.pageIndex + '&pageSize=' + this.pageSize)
+                    .then(response => { this.tableData = response.data.checkDtos, this.totalCount = response.data.totalCount })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            },
+            //初始页pageIndex、初始每页数据pageSize和数据data
+            handleSizeChange: function (size) {
+                this.pageSize = size;
+                console.log(this.pageSize)//每页下拉
+                this.Show(this.pageSize);
+            },
+            handleCurrentChange: function (pageIndex) {
+                this.pageIndex = pageIndex;
+                console.log(this.pageIndex);
+                this.Show(this.pageIndex);
+            },
+
+
+
+        },
+        mounted() {
+            this.Show(this.pageIndex);
+
+        }
+    })
+
+    //function tz() {
+    //    location.href = "/Check/ShowCheckShiGai";
+    //}
+</script>

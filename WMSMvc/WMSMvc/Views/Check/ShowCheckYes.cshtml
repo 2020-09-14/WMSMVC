@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewData["Title"] = "ShowCheckYes";
+    Layout = null;
+}
+
+<link href="~/js/ElementUI/element-ui.css" rel="stylesheet" />
+
+<div id="bb">
+    <div>
+        <template>
+            <span style="color:darkseagreen">盘点任务名称： 成都A仓盘点</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color:darkseagreen">盘点仓库： 知识青白江仓库</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color:darkseagreen">盘点库区：C1、C2、C3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+            <span style="color:darkseagreen">盘点日期： 2016-11-30 12：32</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br />
+            <span style="color:darkseagreen">盘点人： 张三</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color:darkseagreen">盘点备注：请及时盘点</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </template>
+    </div>
+            
+            <span>盘点单号：</span>
+            <el-input v-model="checkCNo" placeholder="请输入" style="width:200px"></el-input>
+            <span>任务名称：</span>
+            <el-input v-model="checkName" placeholder="请输入" style="width:200px"></el-input>
+            <span>盘点人：</span>
+            <el-input v-model="defaultInventoryPeople" placeholder="请输入" style="width:200px"></el-input>
+            <el-button type="primary" v-on:click="Show()" icon="el-icon-search">查询</el-button>
+        
+   
+    <template>
+        <el-table :data="tableData"
+                  style="width: 100%">
+            <el-table-column prop="checkTaskId"
+                             label="序号"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="checkCNo"
+                             label="盘点单号"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="checkName"
+                             label="任务名称"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="wareHouseName"
+                             label="盘点仓库"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="checkTimes"
+                             label="盘点时间"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="defaultInventoryPeople"
+                             label="盘点人"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="taskTimes"
+                             label="任务生成时间"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="checkStates"
+                             label="盘点状态"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="checkNumber"
+                             label="盘点序号"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button v-on:click="tz()" size="mini" type="primary">详情</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+
+        <el-pagination v-on:size-change="handleSizeChange"
+                       v-on:current-change="handleCurrentChange"
+                       :current-page="pageIndex"
+                       :page-sizes="[3, 10, 15, 20]"
+                       :page-size="100"
+                       layout="total, sizes, prev, pager, next, jumper"
+                       :total="totalCount">
+        </el-pagination>
+
+    </template>
+
+
+</div>
+<script src="~/js/vue.min.js"></script>
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/ElementUI/element-ui.js"></script>
+<script>
+    var Vue = new Vue({
+        el: "#bb",
+        data: {
+            tableData: '',
+            checkCNo: '',
+            checkName: '',
+            defaultInventoryPeople:'',
+            pageIndex: 1,
+            pageSize: 3,
+            totalCount: 11,
+        },
+        methods: {
+            Show() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/CheckshowYes11?pageIndex='+ this.pageIndex + '&pageSize=' + this.pageSize)
+                    .then(response => { this.tableData = response.data.checkDtos, this.totalCount = response.data.totalCount })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            },
+            //初始页pageIndex、初始每页数据pageSize和数据data
+            handleSizeChange: function (size) {
+                this.pageSize = size;
+                console.log(this.pageSize)//每页下拉
+                this.Show(this.pageSize);
+            },
+            handleCurrentChange: function (pageIndex) {
+                this.pageIndex = pageIndex;
+                console.log(this.pageIndex);
+                this.Show(this.pageIndex);
+            },
+
+
+
+        },
+        mounted() {
+            this.Show(this.pageIndex);
+
+        }
+    })
+</script>
+
+
+

@@ -8,7 +8,7 @@
 <div id="bb">
     <span>采购订单号：</span><el-input v-model="aaa" placeholder="请输入" style="width:200px"></el-input>
     <span>供应商：</span><el-input v-model="bbb" placeholder="请输入" style="width:200px"></el-input>
-    <span class="demonstration">采购日期:</span>
+    <span class="demonstration">采购日期</span>
     <el-date-picker v-model="value1"
                     type="daterange"
                     range-separator="至"
@@ -51,7 +51,7 @@
             <el-table-column label="操作">
                 <template slot-scope="scope">
                     <span v-if="scope.row.purchaseState==0">
-                        <el-button v-on:click="Caigou(scope.row)" size="mini" type="primary">采购</el-button>
+                        <el-button v-on:click="" size="mini" type="primary">采购</el-button>
                     </span>
                     <span v-if="scope.row.purchaseState==1">
                         <el-button v-on:click="" size="mini" type="primary">已采购</el-button>
@@ -100,6 +100,8 @@
         </div>
 
     </el-dialog>
+
+
     <el-dialog title="查看详情" :visible.sync="XiangFormVisible">
         
             <template>
@@ -120,7 +122,10 @@
                     </el-table>
                     </template>
       
-     
+        <div>
+            <el-button v-on:click="cancel()">取消</el-button>
+            <el-button type="primary" v-on:click="sumbitXiangRow()">确定</el-button>
+        </div>
     </el-dialog>
 </div>
 <script src="~/js/vue.min.js"></script>
@@ -150,8 +155,7 @@
             },
             a: '',
             b: '',
-            XId: '',
-            CId:'',
+            XId:'',
             pageIndex: 1,
             pageSize: 3,
             totalCount: 11,
@@ -191,8 +195,7 @@
                     data: { "PurchaseSupplierId": this.a, "PurchaseGoodsId": Number(this.b)},
                     })
                     .then((response) => {
-                        console.log(response);
-                        if (response.data == true) {
+                        if (response.data > 0) {
                             this.addFormVisible = false;
                             this.$message({
                                 type: "success",
@@ -266,29 +269,6 @@
                         console.log(error);
                     });
             },
-            Caigou(row) {
-                this.CId = row.purchaseId
-                axios.get('http://localhost:3687/api/CaiState?ids=' + this.CId)
-                    .then((response) => {
-                        if (response.data == true) {
-                            
-                            this.$message({
-                                type: "success",
-                                message: "采购成功！"
-                             
-                            })
-                            setTimeout(this.loca(),"5000")
-                          
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-
-            },
-            loca() {
-                window.location.href = "/Purchase/Todo"
-            }
             
         },
         mounted() {

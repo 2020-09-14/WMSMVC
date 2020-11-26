@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "ShowCheck";
+    Layout = null;
+}
+
+
+<link href="~/js/ElementUI/element-ui.css" rel="stylesheet" />
+<div id="bb">
+
+    <template>
+        <el-table :data="tableData"
+                  style="width: 100%">
+            <el-table-column prop="checkTaskId"
+                             label="序号"
+                             width="180">
+            </el-table-column>
+
+            <el-table-column prop="coding"
+                             label="物品编码"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="productName"
+                             label="物品品类"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="gWname"
+                             label="物品名称"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="specification"
+                             label="物品规格"
+                             width="190">
+            </el-table-column>
+            <el-table-column prop="tWOsum"
+                             label="库存数量"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="batchNumber"
+                             label="批次号"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="termOfValidity"
+                             label="有效期至"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="goodsAllocation"
+                             label="货位"
+                             width="180">
+            </el-table-column>
+
+        </el-table>
+    </template>
+</div>
+<br />
+<br />
+<button onclick="tz()">提交盘点任务</button>
+
+<script src="~/js/vue.min.js"></script>
+<script src="~/js/axios.min.js"></script>
+<script src="~/js/ElementUI/element-ui.js"></script>
+<script>
+    var Vue = new Vue({
+        el: "#bb",
+        data: {
+            tableData: '',
+        },
+        methods: {
+            Show() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/Checkshow')
+                    .then(function (res) {
+                        _this.tableData = res.data
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            },
+
+
+
+        },
+        mounted() {
+            this.Show();
+
+        }
+    })
+    function tz() {
+        location.href = "/Check/ShowCheckNo";
+    }
+</script>
+
+

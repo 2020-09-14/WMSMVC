@@ -16,19 +16,5 @@ namespace WMSMvc.Controllers
         {
             return View();
         }
-        public ActionResult Todo()
-        {
-            return View();
-        }
-        public ActionResult Ruku(string ids)
-        {
-            ViewBag.Is = ids;
-            return View();
-        }
-        public ActionResult Xiangqing(string ids)
-        {
-            ViewBag.Is = ids;
-            return View();
-        }
     }
 }

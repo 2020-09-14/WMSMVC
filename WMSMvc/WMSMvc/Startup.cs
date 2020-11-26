@@ -34,7 +34,7 @@ namespace WMSMvc
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Muban/Index");
             }
             app.UseStaticFiles();
 
