@@ -1,0 +1,292 @@
+﻿
+@{
+    ViewData["Title"] = "ShowInventory";
+    Layout = null;
+}
+
+<h1>总库存</h1>
+<link href="~/js/ElementUI/element-ui.css" rel="stylesheet" />
+
+
+<div id="table">
+    <template>
+        <span>仓库:</span>
+        <template>
+            <el-select v-model="formData.WareHouseData" clearable="true" v-on:change="selectChange1" placeholder="请选择">
+                <el-option v-for="wh in WareHouse"
+                           :key="wh.warehouseId"
+                           :label="wh.wname"
+                           :value="wh.warehouseId">
+                </el-option>
+            </el-select>
+        </template>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>商品品类:</span>
+        <template>
+            <el-select v-model="formData.ProductCategoryData" clearable="true" v-on:change="selectChange2" placeholder="请选择">
+                <el-option v-for="pc in ProductCategory"
+                           :key="pc.productCategoryId"
+                           :label="pc.productName"
+                           :value="pc.productCategoryId">
+                </el-option>
+            </el-select>
+        </template>
+        <br />
+        <br />
+        <span>商品编码:</span>
+        <el-input placeholder="请输入内容" style="width:200px"
+                  size="medium"
+                  v-model="input1"
+                  clearable>
+        </el-input>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>商品名称:</span>
+        <el-input placeholder="请输入内容" style="width:200px"
+                  size="medium"
+                  v-model="input2"
+                  clearable>
+        </el-input>
+        &nbsp;&nbsp;
+        <el-button type="primary" v-on:click="Show()">查询</el-button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <el-button type="success" v-on:click="method5(tableData)">导出</el-button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <el-button type="info" v-on:click="Play()">打印</el-button>
+        <br />
+        <br />
+        <el-table :data="tableData"
+                  style="width: 100%"
+                  height="250" itemid="tableData">
+            <el-table-column fixed
+                             prop="productCategoryId"
+                             label="序号"
+                             width="150">
+            </el-table-column>
+            <el-table-column prop="wname"
+                             label="所在仓库"
+                             width="150">
+            </el-table-column>
+            <el-table-column prop="productName"
+                             label="商品品类"
+                             width="150">
+            </el-table-column>
+            <el-table-column prop="coding"
+                             label="商品编码"
+                             width="150">
+            </el-table-column>
+            <el-table-column prop="gWname"
+                             label="商品名称"
+                             width="150">
+            </el-table-column>
+            <el-table-column prop="specification"
+                             label="商品规格"
+                             width="150">
+            </el-table-column>
+            <el-table-column prop="twOsum"
+                             label="库存量"
+                             width="150">
+            </el-table-column>
+        </el-table>
+        @*分页*@
+        <el-pagination v-on:size-change="handleSizeChange"
+                       v-on:current-change="handleCurrentChange"
+                       :current-page="pageIndex"
+                       :page-sizes="[3, 10, 15, 20]"
+                       :page-size="100"
+                       layout="total, sizes, prev, pager, next, jumper"
+                       :total="totalCount">
+        </el-pagination>
+    </template>
+
+</div>
+<script src="~/js/vue.min.js"></script>
+<script src="~/js/ElementUI/element-ui.js"></script>
+<script src="~/js/axios.min.js"></script>
+<script src="~/static/admin/layui/layui.js"></script>
+<script src="~/static/admin/js/common.js"></script>
+<script src="~/static/admin/js/main.js"></script>
+<script>
+    //打印表格
+    var idTmr;
+
+    function getExplorer() {
+        var explorer = window.navigator.userAgent;
+        //ie
+        if (explorer.indexOf("MSIE") >= 0) {
+            return 'ie';
+        }
+        //firefox
+        else if (explorer.indexOf("Firefox") >= 0) {
+            return 'Firefox';
+        }
+        //Chrome
+        else if (explorer.indexOf("Chrome") >= 0) {
+            return 'Chrome';
+        }
+        //Opera
+        else if (explorer.indexOf("Opera") >= 0) {
+            return 'Opera';
+        }
+        //Safari
+        else if (explorer.indexOf("Safari") >= 0) {
+            return 'Safari';
+        }
+    }
+
+    function method5(tableid) {
+        if (getExplorer() == 'ie') {
+            var curTbl = document.getElementById(tableid);
+            var oXL = new ActiveXObject("Excel.Application");
+            var oWB = oXL.Workbooks.Add();
+            var xlsheet = oWB.Worksheets(1);
+            var sel = document.body.createTextRange();
+            sel.moveToElementText(curTbl);
+            sel.select();
+            sel.execCommand("Copy");
+            xlsheet.Paste();
+            oXL.Visible = true;
+
+            try {
+                var fname = oXL.Application.GetSaveAsFilename("Excel.xls",
+                    "Excel Spreadsheets (*.xls), *.xls");
+            } catch (e) {
+                print("Nested catch caught " + e);
+            } finally {
+                oWB.SaveAs(fname);
+                oWB.Close(savechanges = false);
+                oXL.Quit();
+                oXL = null;
+                idTmr = window.setInterval("Cleanup();", 1);
+            }
+
+        } else {
+            tableToExcel(tableid)
+        }
+    }
+
+    function Cleanup() {
+        window.clearInterval(idTmr);
+        CollectGarbage();
+    }
+    var tableToExcel = (function () {
+        var uri = 'data:application/vnd.ms-excel;base64,',
+            template = '<html><head><meta charset="UTF-8"></head><body><table  border="1">{table}</table></body></html>',
+            base64 = function (
+                s) {
+                return window.btoa(unescape(encodeURIComponent(s)))
+            },
+            format = function (s, c) {
+                return s.replace(/{(\w+)}/g, function (m, p) {
+                    return c[p];
+                })
+            }
+        return function (table, name) {
+            if (!table.nodeType)
+                table = document.getElementById(table)
+            var ctx = {
+                worksheet: name || 'Worksheet',
+                table: table.innerHTML
+            }
+            window.location.href = uri + base64(format(template, ctx))
+        }
+    })()
+</script>
+<script>
+    new Vue({
+        el: "#table",
+        data: {
+            tableData: '',
+            editFormVisible: false,
+            addFormVisible: false,//是否显示编辑窗口
+            formLabelWidth: '120px',
+            fanLoading: false,
+            input1: '',
+            input2: '',
+            WareHouse: '',
+            ProductCategory: '',
+            formData: {
+                WareHouseData: '',
+                ProductCategoryData: '',
+                wh: '',
+                pc: '',
+                job: '',
+                file: '',
+            },
+            w: '',
+            p: '',
+            pageIndex: 1,
+            pageSize: 3,
+            totalCount: 11
+        },
+
+        methods: {
+            Show() {
+                var _this = this
+                console.log(this.w);
+                axios
+                    .get('http://localhost:3687/api/GetInventory?whid=' + this.w + '&pcid=' + this.p + '&coding=' + this.input1 + '&gwname=' + this.input2 + '&pageIndex=' + this.pageIndex + '&pageSize=' + this.pageSize)
+                    .then(response => { this.tableData = response.data.inventory_List, this.totalCount = response.data.totalCount })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            },
+            selectChange1(warehouseId) {
+                obj = this.WareHouse.find((file) => {
+                    return file.warehouseId == warehouseId
+                });
+                console.log(warehouseId);
+                this.w = warehouseId;
+            },
+            selectChange2(productCategoryId) {
+                obj = this.ProductCategory.find((job) => {
+                    return job.productCategoryId == productCategoryId
+                });
+                console.log(productCategoryId);
+                this.p = productCategoryId;
+            },
+            //初始页pageIndex、初始每页数据pageSize和数据data
+            handleSizeChange: function (size) {
+                this.pageSize = size;
+                console.log(this.pageSize)//每页下拉
+                this.Show(this.pageSize);
+            },
+            handleCurrentChange: function (pageIndex) {
+                this.pageIndex = pageIndex;
+                console.log(this.pageIndex);
+                this.Show(this.pageIndex);
+            },
+            ShowWareHouse() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/GetEX_Warehouse')
+                    .then(function (res) {
+
+                        _this.WareHouse = res.data
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            },
+            ShowProductCategory() {
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/GetEX_ProductCategory')
+                    .then(function (res) {
+
+                        _this.ProductCategory = res.data
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            },
+        },
+        mounted() {
+            this.Show();
+            this.ShowWareHouse();
+            this.ShowProductCategory();
+        }
+    });
+    function Play() {//打印
+        window.print();
+    }
+</script>

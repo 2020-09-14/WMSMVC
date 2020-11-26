@@ -1,0 +1,202 @@
+﻿
+@{
+    ViewData["Title"] = "ShowWareHouseKeeperlist";
+    Layout = null;
+}
+
+<h1>仓库管理权限</h1>
+<link href="~/js/ElementUI/element-ui.css" rel="stylesheet" />
+<div id="div1">
+    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <span>仓库:</span>
+        <template>
+            <el-select v-model="formData.WareHouseData" clearable="true" v-on:change="selectChange1" placeholder="请选择">
+                <el-option v-for="wh in WareHouse"
+                           :key="wh.warehouseId"
+                           :label="wh.wname"
+                           :value="wh.warehouseId">
+                </el-option>
+            </el-select>
+        </template>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <span>库管理员:</span>
+        <el-input placeholder="请输入内容" style="width:200px"
+                  v-model="input1"
+                  clearable>
+        </el-input>
+        &nbsp;&nbsp;
+        <el-button type="primary" v-on:click="Show()">查询</el-button>
+    </el-form>
+    <el-table :data="tableData"
+              style="width: 100%"
+              height="250">
+        <el-table-column fixed
+                         prop="warehouseId"
+                         label="序号"
+                         width="150">
+        </el-table-column>
+        <el-table-column prop="wname"
+                         label="所属仓库"
+                         width="150">
+        </el-table-column>
+        <el-table-column prop="rname"
+                         label="所属库区"
+                         width="150">
+        </el-table-column>
+        <el-table-column prop="keeperName"
+                         label="姓名"
+                         width="150">
+        </el-table-column>
+        <el-table-column prop="keeperPhone"
+                         label="手机号"
+                         width="150">
+        </el-table-column>
+        <el-table-column label="操作">
+            <template slot-scope="scope">
+                <el-button v-on:click="Upt(scope.row)" size="mini" type="primary">仓库权限</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <!-- 新增编辑窗口 -->
+    <el-dialog title="仓库权限" :visible.sync="editFormVisible">
+        <el-form>
+            <el-form-item label="所属库区" :label-width="formLabelWidth">
+                <el-select v-model="formData.WareHouseData" clearable="true" v-on:change="selectChange1" placeholder="请选择">
+                    <el-option v-for="wh in WareHouse"
+                               :key="wh.warehouseId"
+                               :label="wh.wname"
+                               :value="wh.warehouseId">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+        </el-form>
+        <div>
+            <el-button v-on:click="cancel()">取消</el-button>
+            <el-button type="primary" v-on:click="sumbitEditRow()">确定</el-button>
+        </div>
+    </el-dialog>
+    @*分页*@
+    <el-pagination v-on:size-change="handleSizeChange"
+                   v-on:current-change="handleCurrentChange"
+                   :current-page="pageIndex"
+                   :page-sizes="[3, 10, 15, 20]"
+                   :page-size="100"
+                   layout="total, sizes, prev, pager, next, jumper"
+                   :total="totalCount">
+    </el-pagination>
+</div>
+<script src="~/js/vue.min.js"></script>
+<script src="~/js/ElementUI/element-ui.js"></script>
+<script src="~/js/axios.min.js"></script>
+<script>
+    new Vue({
+        el: "#div1",
+        data: {
+            tableData: '',
+            editFormVisible: false,
+            addFormVisible: false,//是否显示编辑窗口
+            formLabelWidth: '120px',
+            fanLoading: false,
+            input1: '',
+            WareHouse: '',
+            formData: {
+                WareHouseData: '',
+                wh: '',
+                job: '',
+                file: '',
+            },
+            ruleForm: {
+
+            },
+            rules: '',
+            w: '',
+            pageIndex: 1,
+            pageSize: 3,
+            totalCount: 11,
+            
+        },
+
+        methods: {
+            Show() {//查询显示
+                var _this = this
+                console.log(this.w);
+                axios
+                    .get('http://localhost:3687/api/WareHouseKeeperlist?whid=' + this.w + '&keeperName=' + this.input1 + '&pageIndex=' + this.pageIndex + '&pageSize=' + this.pageSize)
+                    .then(response => { this.tableData = response.data.wareHouseKeeperDto, this.totalCount = response.data.totalCount })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            },
+            Upt(row) {//点击编辑
+                this.editFormVisible = true
+                this.WarehouseId = row.warehouseId
+            },
+            sumbitEditRow() {//编辑后提交
+                axios.post('http://localhost:3687/api/UptWareHouseKeeper',
+                    {
+                        WId: parseInt(this.WarehouseId),
+
+                    })
+                    .then((response) => {
+                        if (response.data > 0) {
+                            this.editFormVisible = false,
+                                this.$message({
+                                    type: "success",
+                                    message: "修改成功！"
+                                })
+                            this.Show()
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+
+            },
+            cancel() {//取消
+                this.addFormVisible = false
+                this.editFormVisible = false
+                this.$message({
+                    type: 'info',
+                    message: '已取消操作'
+                });
+            },
+            selectChange1(warehouseId) {
+                obj = this.WareHouse.find((file) => {
+                    return file.warehouseId == warehouseId
+                });
+                console.log(warehouseId);
+                this.w = warehouseId;
+            },
+            //初始页pageIndex、初始每页数据pageSize和数据data
+            handleSizeChange: function (size) {
+                this.pageSize = size;
+                console.log(this.pageSize)//每页下拉
+                this.Show(this.pageSize);
+            },
+            handleCurrentChange: function (pageIndex) {
+                this.pageIndex = pageIndex;
+                console.log(this.pageIndex);
+                this.Show(this.pageIndex);
+            },
+            ShowWareHouse() {//仓库下拉
+                var _this = this
+                axios
+                    .get('http://localhost:3687/api/GetEX_Warehouse')
+                    .then(function (res) {
+
+                        _this.WareHouse = res.data
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            },
+        },
+        mounted() {//首次加载
+            this.Show();
+            this.ShowWareHouse();
+        }
+    });
+</script>
+
+
+

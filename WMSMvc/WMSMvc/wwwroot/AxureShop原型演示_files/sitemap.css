@@ -1,0 +1,399 @@
+
+#sitemapHost {
+    font-size: 12px;
+    color:#4a4a4a;
+    height: 100%;
+}
+
+#sitemapHostBtn a {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/sitemap_on.png?token=f8a39814a1f2c3f0bd80e0a070d49ee2745b181bf973e9b8f6d531d41804822d');
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/sitemap_on.svg?token=282e4e4d32e47fc97502ae3a8090e17b042a39de35e527a090ff6e6813dacd67'),linear-gradient(transparent, transparent);
+}
+
+.hashover #sitemapHostBtn a:hover {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/sitemap_hover.png?token=3cdae32ba5a5d9933f0d6081f9a04a14124b7c82bba7c2ac0cfef8fa3c8c90ef');
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/sitemap_hover.svg?token=58e6d7f137e761238b0ff083bf2be8df71e03efe649b62db2a1408a9a56f2e9b'),linear-gradient(transparent, transparent);
+}
+
+#sitemapHostBtn a.selected, #sitemapHostBtn a.selected:hover {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/sitemap_off.png?token=215c88ae4a0aca1c85fdc838601f7236ac377b1715451b218ebc70bc2a739b46');
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/sitemap_off.svg?token=e436334379750cfac08d7841cecdcec2eef6d41cdb568f54a517ceaf4eab664a'),linear-gradient(transparent, transparent);
+}
+
+#sitemapHost .pageButtonHeader {
+    top: -27px;
+}
+
+#sitemapTreeContainer {
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.sitemapTree {
+    margin: 0px 0px 10px 0px;
+    overflow:visible;
+}
+
+.sitemapTree ul {
+    list-style-type: none;
+    margin: 0px 0px 0px 0px;
+    padding-left: 0px;
+}
+
+.sitemapPlusMinusLink 
+{
+}
+
+.sitemapMinus 
+{
+	vertical-align:middle;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/minus.gif?token=9fe0d62f80bd3cff4d54d96989ec053bb148e4ece7747a3f7ea76d79b35329be');
+    background-repeat: no-repeat;
+	margin-right: 3px;	
+	margin-bottom: 1px;
+    height:9px;
+    width:9px;
+    display:inline-block;
+}
+
+.sitemapPlus 
+{
+	vertical-align:middle;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/plus.gif?token=3c5e2781ab9a96aee1491bede3cd35e187a571f8e1c6e875aed148b4159a706a');
+    background-repeat: no-repeat;
+	margin-right: 3px;	
+	margin-bottom: 1px;
+	height:9px;
+    width:9px;
+    display:inline-block;
+}
+
+.sitemapPageLink 
+{
+    margin-left: 0px;
+}
+
+.sitemapPageIcon 
+{
+	margin: 0px 0px -3px 4px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/page.png?token=10b4a66610e6607d62692d43bc5a8d2c22230084429d40d492df39775777c553') no-repeat center center;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/page.svg?token=5fa1447bc948bad9278476e4013410c84b8feed5ad7e81c7dec436169e0436ee') no-repeat center center, linear-gradient(transparent,transparent);
+}
+
+.sitemapFlowIcon
+{
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/flow.png?token=150998df6029ba092321071b43fc873b9e2c4add9027e6b24ccff0895ba105b9') no-repeat center center;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/flow.svg?token=a244400d686014920f948b70399441cefef4f1139e17a15186b036fa3964228e') no-repeat center center, linear-gradient(transparent,transparent);
+}
+
+.sitemapFolderIcon
+{
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/folder_closed.png?token=eed42ba915c90d0776f1e0d064ea1125d573691a91c66712821ade381b79c050') no-repeat center center;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/folder_closed.svg?token=728e0c525c0208d5b48b46f6a0cab87b54502985f01cdff8184f394d6f631e41') no-repeat center center, linear-gradient(transparent,transparent);
+}
+
+.sitemapFolderOpenIcon
+{
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/folder_open.png?token=7ceececf654caa6ba72c4ce53e11fd2b846fa045e3c43c7f905473e0bb65bc4b') no-repeat center center;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/folder_open.svg?token=322d5ec4b8dcae56d1d1a7a3785396b93021662d46b1e94657b6d39a0e905c55') no-repeat center center, linear-gradient(transparent,transparent);
+}
+
+.sitemapPageName 
+{
+    margin-left: 7px;
+}
+
+.sitemapNode 
+{
+    /*margin:4px 0px 4px 0px;*/
+    white-space:nowrap;
+}
+
+.sitemapPageLinkContainer {
+    /*display: inline-block;*/
+    margin-left: 0px;
+    padding: 4px 0px 4px 0px;
+}
+/*
+.sitemapNode div
+{
+	padding-top: 1px; 
+	padding-bottom: 3px;
+    padding-left: 20px;
+	height: 14px;
+}
+*/
+
+.sitemapExpandableNode 
+{
+	margin-left: 0px;
+}
+
+.sitemapHighlight 
+{
+    /*display: inline-block;*/
+	background-color : #C8E0F0;
+    font-weight: bold;
+}
+
+.sitemapGreyedName
+{
+	color: #AAA;
+}
+
+
+.pluginNameHeader
+{
+    font-family: 'Trebuchet MS';
+	font-size: 12px;
+    letter-spacing: 1px;
+	/*font-weight: bold;*/
+	white-space: nowrap;
+    margin-bottom: 5px;
+}
+
+.pageNameHeader
+{
+    font-family: 'Trebuchet MS';
+    /*display: inline-block;*/
+    /*float: left;*/
+	font-size: 15px;
+	font-weight: bold;
+	/*height: 23px;*/
+    padding-right: 77px;
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pageButtonHeader
+{
+    float: right;
+    position: relative;
+    /*width: 72px;*/
+	height: 24px;
+    top: -22px;
+    margin-bottom: -24px;
+}
+
+.sitemapHeader
+{
+    padding-top: 27px;
+    border-bottom: 1px solid #d9d9d9;
+    min-width: 110px;
+}
+
+.sitemapToolbar {
+    margin: 0px 5px 14px 12px;
+}
+
+.sitemapToolbarButton
+{
+    float: left;
+    width: 22px;
+    height: 22px;
+    border: 1px solid transparent;
+}
+
+#linksButton {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/share.png?token=34461172753e2bedd90568a53c025654740e4d99b2988402075e17b58fd36641') no-repeat center center;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/share.svg?token=41c74c037bca17aa8e90ee881ae6c6bf1775bc2a2f4f57ed90ffbb0146ead489') no-repeat center center, linear-gradient(transparent,transparent);
+}
+
+#linksButton:hover {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/share_hover.png?token=fea03b5220dccb853524d727914d7062b1bc2e03c1b1a9ac00466815bdf72e61') no-repeat center center;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/share_hover.svg?token=48730dff1b66bdd5328c5bc3d324a07155f2d534ac22d89855beae82254c88ff') no-repeat center center, linear-gradient(transparent,transparent);
+}
+
+#linksButton.sitemapToolbarButtonSelected, .hashover #linksButton.sitemapToolbarButtonSelected:hover {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/share_on.png?token=281ed682dd0f9cdeadca340f395cd3b130d161107fd14767c7309d388875851c') no-repeat center center;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/share_on.svg?token=d3fc931a5e9d6df101faf3bb38c32c6352e70ad45179f4610e7c303047caeadd') no-repeat center center, linear-gradient(transparent,transparent);
+}
+
+#adaptiveButton {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/views.png?token=ac175c925989981552d91d24331944929d861a1f5458866d06c5b869fca02924') no-repeat center center;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/views.svg?token=62e0b7c6cab71f5478b537cbd7421165c01ba631076db38a7cc7f6306e846a05') no-repeat center center, linear-gradient(transparent,transparent);
+}
+
+#adaptiveButton:hover {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/views_hover.png?token=f9a28c9c5657994c922454c516e816679feb1ee5f5b39b7bfa22bc12d0176141') no-repeat center center;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/views_hover.svg?token=37765923400f6d9f502771d1c8319390b9a6d6ed61a23c1ab0cadf2acfba341f') no-repeat center center, linear-gradient(transparent,transparent);
+}
+
+#adaptiveButton.sitemapToolbarButtonSelected, #adaptiveButton.sitemapToolbarButtonSelected:hover {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/views_on.png?token=86e297c3c13e335b93cb203484b5bddba4610b270ddffdbbb0d9e828f135cadb') no-repeat center center;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/views_on.svg?token=1b9698524692d358370496435e6f47c38f5a9601b01eeda617bef351daed05e2') no-repeat center center, linear-gradient(transparent,transparent);
+}
+
+#highlightInteractiveButton {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/hotspots.png?token=59a45f30d78cb189c520f2c4baeb8763914315217aa5fc186e46e6496bd94f19') no-repeat center center;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/hotspots.svg?token=76ce3297729e9ac5c0b0daa911e667500b2f158a794dd7311a0ad73091694387') no-repeat center center, linear-gradient(transparent,transparent);
+    margin-top: 1px;
+}
+
+#highlightInteractiveButton:hover {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/hotspots_hover.png?token=df64828db4f630995bc4762fe01f0b05025faedaf092109d1552b226db1ef067') no-repeat center center;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/hotspots_hover.svg?token=dfb089720f60cd7b106569dd57cceba0493395329c233d0dee2707f59af26f23') no-repeat center center, linear-gradient(transparent,transparent);
+}
+
+#highlightInteractiveButton.sitemapToolbarButtonSelected, #highlightInteractiveButton.sitemapToolbarButtonSelected:hover {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/hotspots_on.png?token=6a2bbfcb574d6b889e4c1619e7a566b14a7f1b56fb86ad4880994d83e97f8733') no-repeat center center;
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/hotspots_on.svg?token=602682838244ec5fb93ecbc6a8d91ae5300b84a10e8f0a752c704f2520828bb7') no-repeat center center, linear-gradient(transparent,transparent);
+}
+
+/*#variablesButton {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/229_variables_16.png?token=f0bd98918ac1c16bbd71751d50c95d6dc7c1b85b38716fefcaaea111b842feec') no-repeat center center;
+}*/
+
+#searchButton {
+    background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/232_search_16.png?token=b624cb7baa88fec0b655c56ad08bfeff480c9c725c015b0b7b67028c84fbfa32') no-repeat center center;
+}
+
+.sitemapLinkContainer
+{
+	margin-top: 8px;
+	padding-right: 5px;
+	/*font-size: 12px;*/
+}
+
+.sitemapLinkField 
+{
+	width: 100%;
+	font-size: 12px;
+	margin-top: 3px;
+    padding: 5px;
+}
+
+.sitemapRadioSelected {
+    font-weight: bold;
+}
+
+.sitemapOptionContainer
+{
+	margin-top: 8px;
+	padding-right: 5px;
+	/*font-size: 12px;*/
+}
+
+#sitemapOptionsDiv
+{
+	margin-top: 10px;
+	/*margin-left: 16px;*/
+}
+
+#viewSelectDiv
+{
+    padding: 2px 0px 0px 0px;
+	/*margin-left: 5px;*/
+}
+
+#viewSelect
+{
+	width: 70%;
+}
+
+.sitemapUrlOption
+{
+	padding-bottom: 8px;
+}
+
+.optionLabel
+{
+	font-size: 12px;
+}
+
+.sitemapPopupContainer
+{
+    display: none;
+    position: absolute;
+	background-color: #F4F4F4;
+	border: 1px solid #B9B9B9;
+	padding: 5px 5px 5px 5px;
+	margin: 5px 0px 0px 5px;
+    z-index: 1;
+}
+
+#sitemapLinksContainer {
+    border-top: 1px solid #d9d9d9;
+    padding: 10px;
+    margin-left: 0px;
+    /*line-height: 18px;*/
+}
+
+#adaptiveViewsContainer {
+    border-top: 1px solid #d9d9d9;
+    padding: 10px;
+    margin-left: 0px;
+    line-height: 18px;
+}
+
+.adaptiveViewOption
+{
+	padding: 2px;
+}
+
+.adaptiveViewOption:hover
+{ 
+	background-color: rgb(204,235,248);
+	cursor: pointer;
+}
+
+.currentAdaptiveView {
+    font-weight: bold;
+}
+
+.adaptiveCheckboxDiv {
+	height: 15px;
+	width: 15px;
+	float: left;
+}
+
+.checkedAdaptive {
+	background: url('http://cloud.axureshop.com/gsc/G87YLY/2d/cf/59/2dcf598bf034453f9b8fa67300dc48b6/plugins/sitemap/styles/images/adaptivecheck.png?token=3d4f818c43ada229637d0100f913d2da3dda82e1ade753bef70fabc3f56e4c53') no-repeat center center;
+}
+
+/*#variablesContainer 
+{
+	max-height: 350px;
+	overflow: auto;
+}*/
+
+/*#variablesClearLink 
+{
+	color: #069;
+	left: 5px;
+}*/
+
+#searchDiv {
+    padding: 8px 12px 11px 12px;
+}
+
+#searchBox {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #d9d9d9;
+    /*border-bottom: 1px solid #d9d9d9;*/
+    padding: 5px;
+    font-size: 12px;
+}
+
+.searchBoxHint 
+{
+	color: #8f949a;
+	/*font-style: italic;*/
+}
+
+#sitemapLinksPageName
+{
+	font-weight: bold;
+}
+
+#sitemapOptionsHeader
+{
+	font-weight: bold;
+}

@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\wmsmvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj": {}
+    "C:\\Users\\lenovo\\Desktop\\WMS项目\\MVC\\WMSMvc\\WMSMvc\\WMSMvc.csproj": {}
   },
   "projects": {
-    "D:\\wmsmvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj": {
+    "C:\\Users\\lenovo\\Desktop\\WMS项目\\MVC\\WMSMvc\\WMSMvc\\WMSMvc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\wmsmvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
+        "projectUniqueName": "C:\\Users\\lenovo\\Desktop\\WMS项目\\MVC\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
         "projectName": "WMSMvc",
-        "projectPath": "D:\\wmsmvc\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
-        "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "D:\\wmsmvc\\WMSMvc\\WMSMvc\\obj\\",
+        "projectPath": "C:\\Users\\lenovo\\Desktop\\WMS项目\\MVC\\WMSMvc\\WMSMvc\\WMSMvc.csproj",
+        "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lenovo\\Desktop\\WMS项目\\MVC\\WMSMvc\\WMSMvc\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.1.config",
+          "C:\\Users\\lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +25,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "D:\\新建文件夹\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -66,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

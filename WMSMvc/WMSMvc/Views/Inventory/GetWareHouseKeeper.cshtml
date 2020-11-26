@@ -1,0 +1,271 @@
+﻿
+@{
+    ViewData["Title"] = "GetWareHouseKeeper";
+    Layout = null;
+}
+
+<h1>库管理员管理</h1>
+<link href="~/js/ElementUI/element-ui.css" rel="stylesheet" />
+<div id="div1">
+    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <span>库管理员:</span>
+        <el-input placeholder="请输入内容" style="width:200px"
+                  v-model="input1"
+                  clearable>
+        </el-input>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <span>手机号:</span>
+        <el-input placeholder="请输入内容" style="width:200px"
+                  v-model="input2"
+                  clearable>
+        </el-input>
+        <el-button type="primary" v-on:click="Show()">查询</el-button>
+        <el-button v-on:click="addRow()" type="primary" class="el-icon-circle-plus-outline">新增库管理员</el-button>
+        <!-- 新增库区窗口 -->
+        <el-dialog title="新增库管理员" :visible.sync="addFormVisible">
+            <el-form>
+                <el-form-item label="姓名" :label-width="formLabelWidth">
+                    <el-input v-model="KeeperName" autocomplete="off"></el-input>
+                </el-form-item>
+
+                <el-form-item label="手机号" :label-width="formLabelWidth">
+                    <el-input v-model="KeeperPhone" autocomplete="off"></el-input>
+                </el-form-item>
+            </el-form>
+            <div>
+                <el-button v-on:click="cancel()">取消</el-button>
+                <el-button type="primary" v-on:click="sumbitAddRow()">确定</el-button>
+            </div>
+        </el-dialog>
+    </el-form>
+    <el-table :data="tableData"
+              style="width: 100%"
+              height="250">
+        <el-table-column fixed
+                         prop="wareHouserKeeperId"
+                         label="序号"
+                         width="150">
+        </el-table-column>
+        <el-table-column prop="keeperName"
+                         label="姓名"
+                         width="150">
+        </el-table-column>
+        <el-table-column prop="keeperPhone"
+                         label="手机号"
+                         width="150">
+        </el-table-column>
+        <el-table-column prop="createTime"
+                         label="创建时间"
+                         width="150">
+        </el-table-column>
+        <el-table-column label="状态"
+                         width="150">
+            <template slot-scope="scope">
+                <p v-if="scope.row.state==0">禁用</p>
+                <p v-if="scope.row.state==1">启用</p>
+            </template>
+        </el-table-column>
+        <el-table-column label="操作">
+            <template slot-scope="scope">
+                <span v-if="scope.row.state==0">
+                    <el-button v-on:click="StartUsing(scope.row)" size="mini" type="primary">启用</el-button>
+                </span>
+                <span v-if="scope.row.state==1">
+                    <el-button v-on:click="StopUsing(scope.row)" size="mini" type="primary">禁用</el-button>
+                </span>
+                <el-button v-on:click="Upt(scope.row)" size="mini" type="primary">编辑信息</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <!-- 新增编辑窗口 -->
+    <el-dialog title="添加库管理员" :visible.sync="editFormVisible">
+        <el-form>
+            <el-form-item label="姓名" :label-width="formLabelWidth">
+                <el-input v-model="KeeperName1" autocomplete="off"></el-input>
+            </el-form-item>
+
+            <el-form-item label="手机号" :label-width="formLabelWidth">
+                <el-input v-model="KeeperPhone1" autocomplete="off"></el-input>
+            </el-form-item>
+        </el-form>
+        <div>
+            <el-button v-on:click="cancel()">取消</el-button>
+            <el-button type="primary" v-on:click="sumbitEditRow()">确定</el-button>
+        </div>
+    </el-dialog>
+    @*分页*@
+    <el-pagination v-on:size-change="handleSizeChange"
+                   v-on:current-change="handleCurrentChange"
+                   :current-page="pageIndex"
+                   :page-sizes="[3, 10, 15, 20]"
+                   :page-size="100"
+                   layout="total, sizes, prev, pager, next, jumper"
+                   :total="totalCount">
+    </el-pagination>
+</div>
+<script src="~/js/vue.min.js"></script>
+<script src="~/js/ElementUI/element-ui.js"></script>
+<script src="~/js/axios.min.js"></script>
+<script>
+    new Vue({
+        el: "#div1",
+        data: {
+            tableData: '',
+            editFormVisible: false,
+            addFormVisible: false,//是否显示编辑窗口
+            formLabelWidth: '120px',
+            fanLoading: false,
+            input1: '',
+            input2: '',
+            ruleForm: {
+
+            },
+            rules: '',
+            pageIndex: 1,
+            pageSize: 3,
+            totalCount: 11,
+            KeeperName: '',
+            KeeperPhone: '',
+            KeeperName1: '',
+            KeeperPhone1: ''
+        },
+
+        methods: {
+            Show() {//查询显示
+                var _this = this
+                console.log(this.w);
+                axios
+                    .get('http://localhost:3687/api/GetWareHouseKeeper?keeperName=' + this.input1 + '&keeperPhone=' + this.input2 + '&pageIndex=' + this.pageIndex + '&pageSize=' + this.pageSize)
+                    .then(response => { this.tableData = response.data.keeperDto, this.totalCount = response.data.totalCount })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            },
+            StartUsing(row) {
+                this.Id = row.wareHouserKeeperId
+                axios.get('http://localhost:3687/api/StartUsing?id=' + this.Id)
+                    .then((response) => {
+                        if (response.data == true) {
+
+                            this.$message({
+                                type: "success",
+                                message: "启用成功！"
+
+                            })
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            },
+            StopUsing(row) {
+                this.Id = row.wareHouserKeeperId
+                axios.get('http://localhost:3687/api/StopUsing?id=' + this.Id)
+                    .then((response) => {
+                        if (response.data == true) {
+
+                            this.$message({
+                                type: "success",
+                                message: "已禁用！"
+
+                            })
+
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            },
+            addRow() {//点击添加
+                this.addFormVisible = true
+            },
+            sumbitAddRow() {//确认添加
+                var time = new Date();
+                var aa = {
+                    "KeeperName": this.KeeperName, "KeeperPhone": this.KeeperPhone, "CreateTime": time.toLocaleTimeString(), "State":0
+                }
+                console.log(aa);
+                axios({
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+
+                    dataType: "json",
+                    url: 'http://localhost:3687/api/AddKeeper',
+                    method: 'post',
+                    data: aa,
+                })
+                    .then((response) => {
+                        console.log(response);
+                        if (response.data == true) {
+                            this.addFormVisible = false
+                            this.$message({
+                                type: "success",
+                                message: "添加成功！"
+                            })
+                            this.Show()
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            Upt(row) {//点击编辑
+                this.editFormVisible = true
+                this.WareHouserKeeperId = row.wareHouserKeeperId
+                this.KeeperName1 = row.keeperName
+                this.KeeperPhone1 = row.keeperPhone
+            },
+            sumbitEditRow() {//编辑后提交
+                axios.post('http://localhost:3687/api/UptKeeper',
+                    {
+                        WareHouserKeeperId: parseInt(this.WareHouserKeeperId),
+                        KeeperName: this.KeeperName1,
+                        KeeperPhone: this.KeeperPhone1,
+                    })
+                    .then((response) => {
+                        if (response.data > 0) {
+                            this.editFormVisible = false,
+                                this.$message({
+                                    type: "success",
+                                    message: "修改成功！"
+                                })
+                            this.Show()
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+
+            },
+            cancel() {//取消
+                this.addFormVisible = false
+                this.editFormVisible = false
+                this.$message({
+                    type: 'info',
+                    message: '已取消操作'
+                });
+            },
+            //初始页pageIndex、初始每页数据pageSize和数据data
+            handleSizeChange: function (size) {
+                this.pageSize = size;
+                console.log(this.pageSize)//每页下拉
+                this.Show(this.pageSize);
+            },
+            handleCurrentChange: function (pageIndex) {
+                this.pageIndex = pageIndex;
+                console.log(this.pageIndex);
+                this.Show(this.pageIndex);
+            },
+        },
+        mounted() {//首次加载
+            this.Show();
+        }
+    });
+</script>
+
+
+
+

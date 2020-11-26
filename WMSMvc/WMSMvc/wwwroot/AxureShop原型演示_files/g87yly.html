@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<!-- saved from url=(0095)http://cloud.axureshop.com/g87yly/#g=1&p=%E5%BA%93%E5%AD%98%E6%8A%A5%E8%AD%A6%E7%9C%8B%E6%9D%BF -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <title>库存报警看板</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link type="text/css" href="./reset.css" rel="Stylesheet">
+    <link type="text/css" href="./default.css" rel="Stylesheet">
+    <!--<link href='https://fonts.googleapis.com/css?family=Nunito:300' rel='stylesheet' type='text/css'>-->
+
+    <script src="./hm.js(1).下载"></script><script type="text/javascript">
+        AXSHARE_HOST_URL = 'http://cloud.axureshop.com';
+        AXSHARE_HOST_SECURE_URL = 'http://cloud.axureshop.com';
+        ACCOUNT_SERVICE_URL = 'http://cloud.axureshop.com';
+        ACCOUNT_SERVICE_SECURE_URL = 'http://cloud.axureshop.com';
+        ON_PREM_LDAP_ENABLED = 'false';
+</script><script type="text/javascript">
+        if (location.href.toString().indexOf('file://localhost/') == 0) {
+            location.href = location.href.toString().replace('file://localhost/', 'file:///');
+        }
+    </script>
+
+    <!-- 8.0.0.3387 -->
+<script src="./jquery-1.7.1.min.js.下载"></script>
+<script src="./startPre.js.下载"></script>
+<script src="./document.js.下载"></script>
+
+    <style type="text/css">
+
+#outerContainer {
+	width:1000px;
+	height:1500px;
+}
+
+.vsplitbar {
+    width: 3px;
+    /*background: #B9B9B9;*/
+    border-right: 1px solid #8f949a;
+}
+
+.vsplitbar:hover, .vsplitbar.active {
+    background: #8f949a;
+}
+
+#rightPanel {
+    background-color: White;
+}
+
+/*#leftPanel {
+    min-width: 120px;
+}*/
+
+.splitterMask {
+   position:absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
+   background-image: url(resources/images/transparent.gif);
+   z-index: 20000;
+}
+
+    </style>
+    <script type="text/javascript" language="JavaScript"><!--
+        var SITEMAP_COLLAPSE_VAR_NAME = 'c';
+        var PLUGIN_VAR_NAME = 'g';
+        var FOOTNOTES_VAR_NAME = 'fn';
+        var ADAPTIVE_VIEW_VAR_NAME = 'view';
+        var lastLeftPanelWidth = 295;
+        var toolBarOnly = true;
+
+        // isolate scope
+        (function() {
+            setUpController();
+            
+            var configuration = $axure.document.configuration;
+            var _settings = {};
+            _settings.projectId = 'G87YLY';
+            _settings.isAxshare = configuration.isAxshare;
+            _settings.loadFeedbackPlugin = configuration.loadFeedbackPlugin;
+            var cHash = getHashStringVar(SITEMAP_COLLAPSE_VAR_NAME);
+            _settings.startCollapsed = cHash == "1";
+            if(cHash == "2") closePlayer();
+            var gHash = getHashStringVar(PLUGIN_VAR_NAME);
+            if(gHash == "") gHash = 1;
+            _settings.startPluginGid = gHash;
+
+            $axure.player.settings = _settings;
+
+            $(window).bind('load', function() {
+                if(CHROME_5_LOCAL && !$('body').attr('pluginDetected')) {
+                    window.location = 'resources/chrome/chrome.html';
+                }
+            });
+
+            $(document).ready(function() {
+                $axure.page.bind('load.start', mainFrame_onload);
+                $axure.messageCenter.addMessageListener(messageCenter_message);
+
+                $(document).on('pluginShown', function (event, data) {
+                    setVarInCurrentUrlHash('g', data ? data : '');
+                });
+
+                $(document).on('pluginCreated', function(event, data) {
+                    if($axure.player.settings.startPluginGid == data) {
+                        $axure.player.showPlugin(data);
+                    }
+                });
+
+                if($axure.player.settings.loadFeedbackPlugin) {
+                    if($axure.player.settings.isAxshare) {
+                        $axure.utils.loadJS('/Scripts/plugins/feedback/feedback8.js');
+                    } else {
+                        $axure.utils.loadJS('http://share.axure.com/Scripts/plugins/feedback/feedback8.js');
+                    }
+                }
+
+                if(navigator.userAgent.indexOf("MSIE") >= 0) $('#outerContainer').width('100%');
+                initialize();
+                if($axure.player.settings.startCollapsed) $('#outerContainer').splitter({ sizeLeft: 0 });
+                else $('#outerContainer').splitter({ sizeLeft: lastLeftPanelWidth });
+                $('#leftPanel').width(lastLeftPanelWidth);
+                
+                $(window).resize(function() { resizeContent(); });
+
+                $('#maximizePanelContainer').hide();
+
+                initializeLogo();
+
+                $(window).resize();
+                resizeContent();
+                
+                $axure.player.collapseToBar();
+
+                if($axure.player.settings.startCollapsed) {
+                    collapse();
+                    $('#leftPanel').width(0);
+                }
+
+                if(MOBILE_DEVICE) {
+                    $('#interfaceControlFrameMinimizeContainer').height('45px');
+                    $('#interfaceControlFrameMinimizeContainer a').height('45px');
+                    $('#interfaceControlFrameHeaderContainer').css('margin-top','45px');
+                    $('#interfaceControlFrameCloseContainer a').css('padding','10px 0px');
+                    $('#maximizePanelContainer').height('45px');//.css('top','inherit').css('bottom','0px');
+
+                    $('body').removeClass('hashover');
+
+                    if(IOS) {
+                        $('#rightPanel').css('overflow', 'auto').css('-webkit-overflow-scrolling', 'touch').css('-ms-overflow-x', 'hidden');
+
+                        window.addEventListener("orientationchange", function() {
+                            var viewport = document.querySelector("meta[name=viewport]");
+                            //so iOS doesn't zoom when switching back to portrait
+                            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0');
+                            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+                            resizeContent();
+                        }, false);
+
+                        $axure.page.bind('load.start', function() {
+                            resizeContent();
+                        });
+                    }
+                }
+
+            });
+
+            function initialize() {
+                var legacyQString = getQueryString("Page");
+                if (legacyQString.length > 0) {
+                    location.href = location.href.substring(0, location.href.indexOf("?")) + "#p=" + legacyQString;
+                    return;
+                }
+
+                var mainFrame = document.getElementById("mainFrame");
+                //if it's local file on safari, test if we can access mainframe after its loaded
+                if(SAFARI && document.location.href.indexOf('file://') >= 0) {
+                    $(mainFrame).load(function () {
+                        var canAccess;
+                        try {
+                            var mainFrameWindow = mainFrame.contentWindow || mainFrame.contentDocument;
+                            mainFrameWindow['safari_file_CORS'] = 'Y';
+                            canAccess = mainFrameWindow['safari_file_CORS'] === 'Y';
+                        } catch(err) {
+                            canAccess = false;
+                        }
+
+                        if(!canAccess) window.location = 'resources/chrome/safari.html';
+                    });
+                }
+
+                mainFrame.contentWindow.location.href = getInitialUrl();
+            }
+
+            function initializeLogo() {
+                if($axure.document.configuration.logoImagePath) {
+                    var image = new Image();
+                    image.onload = function() {
+                        $('#logoImage').css('max-width', this.width + 'px');
+                        $axure.player.resizeContent();
+                    };
+                    image.src = $axure.document.configuration.logoImagePath;
+                
+                    $('#interfaceControlFrameLogoImageContainer').html('<img id="logoImage" src="" />');
+                    $('#logoImage').attr('src', $axure.document.configuration.logoImagePath).load(function() { resizeContent(); });
+                } else $('#interfaceControlFrameLogoImageContainer').hide();
+
+                if ($axure.document.configuration.logoImageCaption) {
+                    $('#interfaceControlFrameLogoCaptionContainer').html($axure.document.configuration.logoImageCaption);
+                } else $('#interfaceControlFrameLogoCaptionContainer').hide();
+
+                if(!$('#interfaceControlFrameLogoImageContainer').is(':visible') && !$('#interfaceControlFrameLogoCaptionContainer').is(':visible')) {
+                    $('#interfaceControlFrameLogoContainer').hide();
+                }
+            }
+
+            var resizeContent = $axure.player.resizeContent = function() {
+                var newHeight = $(window).height();
+                var newWidth = $(window).width();
+
+                var controlContainerHeight = newHeight;// - 30;
+                if($('#interfaceControlFrameLogoContainer').is(':visible')) controlContainerHeight -= $('#interfaceControlFrameLogoContainer').outerHeight();// + 16;
+
+                $('#outerContainer').height(newHeight).width(newWidth);
+                $('.vsplitbar').height(newHeight);
+                $('#leftPanel').height(newHeight);
+                $('#interfaceControlFrame').height(newHeight);
+                $('#interfaceControlFrameContainer').height(newHeight);
+                $('#interfaceControlFrameHostContainer').height(controlContainerHeight);
+
+                $('#rightPanel').height(newHeight);
+                $('#mainFrame').height(newHeight);
+
+                if($('#leftPanel').is(':visible')) $('#rightPanel').width($(window).width() - $('#leftPanel').width() - 1);// $('.vsplitbar').width());
+                else $('#rightPanel').width($(window).width());
+
+                $(document).trigger('ContainerHeightChange',[controlContainerHeight]);
+
+                if(MOBILE_DEVICE) {
+                    if(!(getHashStringVar(ADAPTIVE_VIEW_VAR_NAME).length > 0)) $axure.messageCenter.postMessage('setAdaptiveViewForSize', {'width':newWidth, 'height':$('#rightPanel').height()});
+                }
+            }
+
+            var collapseToBar = $axure.player.collapseToBar = function() {
+                lastLeftPanelWidth = $('#leftPanel').width();
+                $('#leftPanel').width('55px');
+                $('.vsplitbar').hide();
+                $('#rightPanel').width($(window).width() - $('#leftPanel').width());
+                $(window).resize();
+                $('#outerContainer').trigger('resize');
+                toolBarOnly = true;
+            }
+
+            var expandFromBar = $axure.player.expandFromBar = function() {
+                if($('.vsplitbar').is(':visible')) return;
+
+                $('#leftPanel').width(lastLeftPanelWidth);
+                $('.vsplitbar').show();
+                $('#rightPanel').width($(window).width() - $('#leftPanel').width() - 1);// $('.vsplitbar').width());
+                $(window).resize();
+                $('#outerContainer').trigger('resize');
+                toolBarOnly = false;
+            }
+
+        })();
+
+        function messageCenter_message(message, data) {
+            if(message == 'expandFrame') expand();
+            else if(message == 'getCollapseFrameOnLoad' && $axure.player.settings.startCollapsed && !MOBILE_DEVICE) $axure.messageCenter.postMessage('collapseFrameOnLoad');
+        }
+
+        
+        function getInitialUrl() {
+            var pageName = getHashStringVar("p");
+            if(pageName.length > 0) return pageName + ".html";
+            else {
+                var url = getFirstPageUrl($axure.document.sitemap.rootNodes);
+                return (url ? url : "about:blank");
+            }
+        }
+
+        function getFirstPageUrl(nodes) {
+            for (var i = 0; i < nodes.length; i++) {
+                var node = nodes[i];
+                if (node.url) return node.url;
+                else {
+                    var hasChildren = (node.children && node.children.length > 0);
+                    if (hasChildren) {
+                        var url = getFirstPageUrl(node.children);
+                        if (url) return url;
+                    }
+                }
+            }
+            return null;
+        }
+
+        function closePlayer() {
+            if($axure.page.location) window.location.href = $axure.page.location;
+            else {
+                var pageFile = getInitialUrl();
+                var currentLocation = window.location.toString();
+                window.location.href = currentLocation.substr(0, currentLocation.lastIndexOf("/") + 1) + pageFile;
+            }
+        }
+
+        function replaceHash(newHash) {
+            var currentLocWithoutHash = window.location.toString().split('#')[0];
+
+            //We use replace so that every hash change doesn't get appended to the history stack.
+            //We use replaceState in browsers that support it, else replace the location
+            if(typeof window.history.replaceState != 'undefined') {
+                try {
+                    //Chrome 45 (Version 45.0.2454.85 m) started throwing an error here when generated locally (this only happens with sitemap open) which broke all interactions.
+                    //try catch breaks the url adjusting nicely when the sitemap is open, but all interactions and forward and back buttons work.
+                    //Uncaught SecurityError: Failed to execute 'replaceState' on 'History': A history state object with URL 'file:///C:/Users/Ian/Documents/Axure/HTML/Untitled/start.html#p=home' cannot be created in a document with origin 'null'.
+                    window.history.replaceState(null, null, currentLocWithoutHash + newHash);
+                } catch(ex) {}
+            } else {
+                window.location.replace(currentLocWithoutHash + newHash);
+            }
+        }
+
+        function collapse() {
+            setVarInCurrentUrlHash('c', 1);
+            if(!toolBarOnly) lastLeftPanelWidth = $('#leftPanel').width();
+
+            $('#maximizePanelContainer').show();
+            $('#leftPanel').hide();
+            $('.vsplitbar').hide();
+            $('#rightPanel').width($(window).width());
+            $(window).resize();
+            $('#outerContainer').trigger('resize');
+
+            $(document).trigger('sidebarCollapse');
+
+            if(MOBILE_DEVICE) {
+                $('#maximizePanelContainer').animate({
+                    top:$('#rightPanel').height() - $('#maximizePanelContainer').height()
+                }, 300, 'swing', function() {
+                    $('#maximizePanelContainer').css('top', 'inherit').css('bottom', '0px');
+                });
+            }
+        }
+
+        function expand() {
+            if(MOBILE_DEVICE) {
+                $('#maximizePanelContainer').css('top', '0px').css('bottom', 'inherit');
+            }
+
+            deleteVarFromCurrentUrlHash('c');
+            $('#maximizePanelContainer').hide();
+            $('#leftPanel').width(lastLeftPanelWidth);
+            $('#leftPanel').show();
+            if(!toolBarOnly) {
+                $('.vsplitbar').show();
+                $('#rightPanel').width($(window).width() - $('#leftPanel').width() - 1);
+            } else {
+                $axure.player.collapseToBar();
+            }
+            $(window).resize();
+            $('#outerContainer').trigger('resize');
+
+            $(document).trigger('sidebarExpanded');
+        }
+
+
+        function mainFrame_onload() {
+            if($axure.page.pageName) document.title = $axure.page.pageName;
+        }
+
+        function getQueryString(query) {
+            var qstring = self.location.href.split("?");
+            if(qstring.length < 2) return "";
+            return GetParameter(qstring, query);
+        }
+        
+        function GetParameter(qstring, query) {
+            var prms = qstring[1].split("&");
+            var frmelements = new Array();
+            var currprmeter, querystr = "";
+
+            for(var i = 0; i < prms.length; i++) {
+                currprmeter = prms[i].split("=");
+                frmelements[i] = new Array();
+                frmelements[i][0] = currprmeter[0];
+                frmelements[i][1] = currprmeter[1];
+            }
+
+            for(j = 0; j < frmelements.length; j++) {
+                if(frmelements[j][0].toLowerCase() == query.toLowerCase()) {
+                    querystr = frmelements[j][1];
+                    break;
+                }
+            }
+            return querystr;
+        }
+        
+        function getHashStringVar(query) {
+            var qstring = self.location.href.split("#");
+            if(qstring.length < 2) return "";
+            return GetParameter(qstring, query);
+        }
+
+        function setHashStringVar(currentHash, varName, varVal) {
+            var varWithEqual = varName + '=';
+            var poundVarWithEqual = varVal === '' ? '' :  '#' + varName + '=' + varVal;
+            var ampVarWithEqual = varVal === '' ? '' :  '&' + varName + '=' + varVal;
+            var hashToSet = '';
+
+            var pageIndex = currentHash.indexOf('#' + varWithEqual);
+            if(pageIndex == -1) pageIndex = currentHash.indexOf('&' + varWithEqual);
+            if(pageIndex != -1) {
+                var newHash = currentHash.substring(0, pageIndex);
+
+                newHash = newHash == '' ? poundVarWithEqual : newHash + ampVarWithEqual;
+
+                var ampIndex = currentHash.indexOf('&', pageIndex + 1);
+                if(ampIndex != -1) {
+                    newHash = newHash == '' ? '#' + currentHash.substring(ampIndex + 1) : newHash + currentHash.substring(ampIndex);
+                }
+                hashToSet = newHash;
+            } else if(currentHash.indexOf('#') != -1) {
+                hashToSet = currentHash + ampVarWithEqual;
+            } else {
+                hashToSet = poundVarWithEqual;
+            }
+
+            if(hashToSet != '' || varVal == '') {
+                return hashToSet;
+            }
+
+            return null;
+        }
+
+        function setVarInCurrentUrlHash(varName, varVal) {
+            var newHash = setHashStringVar(window.location.hash, varName, varVal);
+
+            if(newHash != null) {
+                replaceHash(newHash);
+            }
+        }
+
+        function deleteHashStringVar(currentHash, varName) {
+            var varWithEqual = varName + '=';
+
+            var pageIndex = currentHash.indexOf('#' + varWithEqual);
+            if(pageIndex == -1) pageIndex = currentHash.indexOf('&' + varWithEqual);
+            if(pageIndex != -1) {
+                var newHash = currentHash.substring(0, pageIndex);
+
+                var ampIndex = currentHash.indexOf('&', pageIndex + 1);
+
+                //IF begin of string....if none blank, ELSE # instead of & and rest
+                //IF in string....prefix + if none blank, ELSE &-rest
+                if(newHash == '') { //beginning of string
+                    newHash = ampIndex != -1 ? '#' + currentHash.substring(ampIndex + 1) : '';
+                } else { //somewhere in the middle
+                    newHash = newHash + (ampIndex != -1 ? currentHash.substring(ampIndex) : '');
+                }
+
+                return newHash;
+            }
+
+            return null;
+        }
+
+        function deleteVarFromCurrentUrlHash(varName) {
+            var newHash = deleteHashStringVar(window.location.hash, varName);
+
+            if(newHash != null) {
+                replaceHash(newHash);
+            }
+        }
+    --></script>
+    
+    <link type="text/css" rel="Stylesheet" href="./sitemap.css">
+    <link type="text/css" rel="Stylesheet" href="./page_notes.css">
+    <link type="text/css" rel="Stylesheet" href="./debug.css">
+    <script src="./startPost.js.下载"></script>
+
+
+    <!--<link type="text/css" rel="Stylesheet" href="plugins/recordplay/styles/recordplay.css" />
+    <script type="text/javascript" src="plugins/recordplay/recordplay.js"></script>-->
+    
+
+<link rel="stylesheet" type="text/css" href="./feedback8.css"><link rel="stylesheet" type="text/css" href="./axSpeechBubble.css"><link rel="stylesheet" href="./style.css" type="text/css"><link rel="stylesheet" type="text/css" href="./axScreenshot.css"><link rel="stylesheet" type="text/css" href="./axPin.css"><link rel="stylesheet" type="text/css" href="./axImgAreaSelect.css"></head>
+<body scroll="no" class="hashover">
+    <div id="outerContainer" style="position: relative; height: 894px; width: 1920px;">
+
+        <div id="leftPanel" style="position: absolute; z-index: 1; left: 0px; width: 295px; height: 894px;">
+            <div id="interfaceControlFrame" style="height: 894px;">
+                <div id="interfaceControlFrameMinimizeContainer">
+                    <a title="Collapse" id="interfaceControlFrameMinimizeButton" onclick="collapse();">&nbsp;</a>
+                </div>
+                <div id="interfaceControlFrameHeaderContainer">
+                    <ul id="interfaceControlFrameHeader"><li id="sitemapHostBtn"><a pluginid="sitemapHost" class="selected">PAGES</a></li><li id="pageNotesHostBtn"><a pluginid="pageNotesHost">NOTES</a></li><li id="feedbackHostBtn"><a pluginid="feedbackHost">DISCUSS</a></li><li id="debugHostBtn"><a pluginid="debugHost">CONSOLE</a></li></ul>
+                </div>
+                <div id="interfaceControlFrameContainer" style="height: 894px;">
+                    <div id="interfaceControlFrameLogoContainer" style="display: none;">
+                        <div id="interfaceControlFrameLogoImageContainer" style="display: none;"></div>
+                        <div id="interfaceControlFrameLogoCaptionContainer" style="display: none;"></div>
+                    </div>
+                    <div id="interfaceControlFrameHostContainer" style="height: 894px;">
+                    <div id="sitemapHost" style="display: block;"><div id="sitemapHeader" '="" class="sitemapHeader"><div id="sitemapToolbar" class="sitemapToolbar"><div class="pluginNameHeader">PAGES</div><div class="pageNameHeader" style="padding-right: 55px;">库存报警看板</div><div class="pageButtonHeader"><a id="linksButton" title="Get Links" class="sitemapToolbarButton"></a><a id="highlightInteractiveButton" title="Highlight interactive elements" class="sitemapToolbarButton"></a></div></div><div id="sitemapLinksContainer" class="sitemapLinkContainer" style="display: none;"><div style="margin-bottom:10px;">Generate sharable URLs</div><input id="sitemapLinkWithPlayer" type="text" class="sitemapLinkField"><div class="sitemapOptionContainer"><div><label><input type="radio" name="sitemapToggle" value="withoutmap">Without Sidebar</label></div><div style="margin-top:10px;"><label><input type="radio" name="sitemapToggle" value="withmap">With Sidebar</label><div id="sitemapOptionsDiv" style="display: none;"><div class="sitemapUrlOption"><label><input type="checkbox" id="minimizeBox" disabled="disabled">Minimize sidebar</label></div><div class="sitemapUrlOption"><label><input type="checkbox" id="collapseBox" disabled="disabled">Pages closed</label></div><div class="sitemapUrlOption"><label><input type="checkbox" id="footnotesBox" disabled="disabled">Hide footnotes</label></div><div class="sitemapUrlOption"><label><input type="checkbox" id="highlightBox" disabled="disabled">Highlight interactive elements</label></div></div></div></div></div></div><div id="sitemapTreeContainer" style="height: 813px;"><div id="searchDiv" style=""><input id="searchBox" style="" type="text" class="searchBoxHint"></div><ul class="sitemapTree" style="clear:both;"><li class="sitemapNode sitemapLeafNode"><div class=""><div class="sitemapPageLinkContainer" style="margin-left:21px"><a class="sitemapPageLink" nodeurl="更新说明.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">更新说明</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:21px"><a class="sitemapPageLink" nodeurl="需求说明.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">需求说明</span></a></div></div></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:9px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><span class="sitemapPageIcon sitemapFolderIcon"></span><span class="sitemapPageName">业务流程</span></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:38px"><a class="sitemapPageLink" nodeurl="总体仓储管理流程.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">总体仓储管理流程</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:38px"><a class="sitemapPageLink" nodeurl="调入处理流程.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">调入处理流程</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:38px"><a class="sitemapPageLink" nodeurl="报损流程.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">报损流程</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:9px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="wms原型首页.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">WMS原型首页</span></a></div></div><ul><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:26px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><span class="sitemapPageIcon sitemapFolderIcon"></span><span class="sitemapPageName">到货业务</span></div></div><ul><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="到货登记.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">到货登记</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="登记详情.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">登记详情</span></a></div></div></li></ul></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="非标品到货登记.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">非标品到货登记</span></a></div></div></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="快捷到货.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">快捷到货</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="快捷到货登记__编辑_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">快捷到货登记 (编辑)</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="到货记录.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">到货记录</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="快捷到货登记详情.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">快捷到货登记详情</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="到货详情（原料）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">到货详情（原料）</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="到货详情_（成品）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">到货详情 （成品）</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="到货质检.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">到货质检</span></a></div></div></li></ul></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="采购质检查询.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">采购质检查询</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:26px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><span class="sitemapPageIcon sitemapFolderIcon"></span><span class="sitemapPageName">入库管理</span></div></div><ul><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="采购入库.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">采购入库</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="入库.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">入库</span></a></div></div></li></ul></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="入库明细.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">入库明细</span></a></div></div></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="入库任务单（采购）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">入库任务单（采购）</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="入库操作.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">入库操作</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="入库任务详情（产品）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">入库任务详情（产品）</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="入库任务详情（商品）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">入库任务详情（商品）</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="入库任务单（直接）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">入库任务单（直接）</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="添加产品入库任务.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">添加产品入库任务</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="添加商品入库任务.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">添加商品入库任务</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="入库任务详情（产品）_1.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">入库任务详情（产品）</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="入库任务详情（商品）_1.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">入库任务详情（商品）</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="入库任务详情（商品）__准确计量_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">入库任务详情（商品） (准确计量)</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="产成品入库.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">产成品入库</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="入库任务详情（加工）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">入库任务详情（加工）</span></a></div></div></li></ul></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:26px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><span class="sitemapPageIcon sitemapFolderIcon"></span><span class="sitemapPageName">出库管理</span></div></div><ul><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="出库明细.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">出库明细</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="报表下载页.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">报表下载页</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="出库计件日报表.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">出库计件日报表</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="采购退货任务单.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">采购退货任务单</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="采购退货任务单详情.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">采购退货任务单详情</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="产品出库任务单.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">产品出库任务单</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="产品出库任务单详情.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">产品出库任务单详情</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="商品出库任务单.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">商品出库任务单</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="商品出库任务单详情.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">商品出库任务单详情</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="直接出库任务单.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">直接出库任务单</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="添加产品出库任务.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">添加产品出库任务</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="添加商品出库任务.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">添加商品出库任务</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="产品出库任务单详情_1.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">产品出库任务单详情</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="商品出库任务单详情_1.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">商品出库任务单详情</span></a></div></div></li></ul></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:26px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><span class="sitemapPageIcon sitemapFolderIcon"></span><span class="sitemapPageName">调拨业务</span></div></div><ul><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="调拨单列表.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">调拨单列表</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="调拨物品详情.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">调拨物品详情</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="补货需求列表.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">补货需求列表</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="补货需求详情.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">补货需求详情</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="调拨单审核.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">调拨单审核</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="审核.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">审核</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="查看.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">查看</span></a></div></div></li></ul></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="调出发配送区.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">调出发配送区</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="调拨入库.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">调拨入库</span></a></div></div></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="调入处理.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">调入处理</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="综合打印.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">综合打印</span></a></div></div></li></ul></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="合格品入库确认.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">合格品入库确认</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:26px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><span class="sitemapPageIcon sitemapFolderIcon"></span><span class="sitemapPageName">库存调整业务</span></div></div><ul><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><span class="sitemapPageIcon sitemapFolderIcon"></span><span class="sitemapPageName">盘点管理</span></div></div><ul><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:60px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="添加盘点任务（按货架）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">添加盘点任务（按货架）</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:89px"><a class="sitemapPageLink" nodeurl="预览盘点任务（分组展示）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">预览盘点任务（分组展示）</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:89px"><a class="sitemapPageLink" nodeurl="预览盘点任务__列表展示_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">预览盘点任务 (列表展示)</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:60px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="添加盘点任务__按物品名称_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">添加盘点任务 (按物品名称)</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:89px"><a class="sitemapPageLink" nodeurl="预览盘点任务（分组展示）_1.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">预览盘点任务（分组展示）</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:89px"><a class="sitemapPageLink" nodeurl="预览盘点任务__列表展示__1.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">预览盘点任务 (列表展示)</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:60px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="盘点任务_未完成_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">盘点任务(未完成)</span></a></div></div><ul><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:77px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="盘点任务详情（分组展示）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">盘点任务详情（分组展示）</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:106px"><a class="sitemapPageLink" nodeurl="盘点任务详情（列表展示）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">盘点任务详情（列表展示）</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:77px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="修改实盘数量（分组展示）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">修改实盘数量（分组展示）</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:106px"><a class="sitemapPageLink" nodeurl="修改实盘数量__列表展示_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">修改实盘数量 (列表展示)</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:77px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="盘点任务详情（按物品分组展示）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">盘点任务详情（按物品分组展示）</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:106px"><a class="sitemapPageLink" nodeurl="盘点任务详情__列表展示_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">盘点任务详情 (列表展示)</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:106px"><a class="sitemapPageLink" nodeurl="修改实盘数量（分组展示）_1.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">修改实盘数量（分组展示）</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:106px"><a class="sitemapPageLink" nodeurl="修改实盘数量__列表展示__1.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">修改实盘数量 (列表展示)</span></a></div></div></li></ul></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:60px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="审核调整单.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">审核调整单</span></a></div></div><ul><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:77px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="审核详情（分组展示）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">审核详情（分组展示）</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:106px"><a class="sitemapPageLink" nodeurl="审核详情__列表展示_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">审核详情 (列表展示)</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:77px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="审核结果详情（按货架分组_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">审核结果详情（按货架分组)</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:106px"><a class="sitemapPageLink" nodeurl="审核结果详情（按货架列表_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">审核结果详情（按货架列表)</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:77px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="审核结果详情（按物品分组_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">审核结果详情（按物品分组)</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:106px"><a class="sitemapPageLink" nodeurl="审核结果详情（按物品列表_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">审核结果详情（按物品列表)</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:77px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="审核详情（按物品分组展示）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">审核详情（按物品分组展示）</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:106px"><a class="sitemapPageLink" nodeurl="审核详情__按物品列表展示_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">审核详情 (按物品列表展示)</span></a></div></div></li></ul></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:60px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="已完成盘点单任务.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">已完成盘点单任务</span></a></div></div><ul><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:77px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="按货架盘点任务详情（分组展示）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">按货架盘点任务详情（分组展示）</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:106px"><a class="sitemapPageLink" nodeurl="按货架盘点任务详情（列表展示）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">按货架盘点任务详情（列表展示）</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:77px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="按物品盘点任务详情（分组展示）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">按物品盘点任务详情（分组展示）</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:106px"><a class="sitemapPageLink" nodeurl="按物品盘点任务详情（列表展示）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">按物品盘点任务详情（列表展示）</span></a></div></div></li></ul></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:89px"><a class="sitemapPageLink" nodeurl="盘点表.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">盘点表</span></a></div></div></li></ul></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><span class="sitemapPageIcon sitemapFolderIcon"></span><span class="sitemapPageName">报损</span></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="报损申请.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">报损申请</span></a></div></div></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:60px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="报损审核.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">报损审核</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:89px"><a class="sitemapPageLink" nodeurl="审核报损审核详情.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">审核报损审核详情</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:89px"><a class="sitemapPageLink" nodeurl="审核报损详情（已审核_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">审核报损详情（已审核)</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:60px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="报损管理.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">报损管理</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:89px"><a class="sitemapPageLink" nodeurl="报损详情（详情）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">报损详情（详情）</span></a></div></div></li></ul></li></ul></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:26px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><span class="sitemapPageIcon sitemapFolderIcon"></span><span class="sitemapPageName">库存报表</span></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="拼团库存预警表.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">拼团库存预警表</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="总库存查询（产品）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">总库存查询（产品）</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="总库存查询__商品_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">总库存查询 (商品)</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="采购入库明细表.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">采购入库明细表</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="采购入库汇总表.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">采购入库汇总表</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="现存量查询.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">现存量查询</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="移位中查询.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">移位中查询</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="安全库存预警_商品_.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">安全库存预警(商品)</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="安全库存预警（产品）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">安全库存预警（产品）</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div class="sitemapHighlight"><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="库存报警看板.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">库存报警看板</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="临期报警管理（产品）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">临期报警管理（产品）</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="临期报警管理（商品）.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">临期报警管理（商品）</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="前置仓库存查询.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">前置仓库存查询</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="库存分布表-产品.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">库存分布表-产品</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="吊牌查询.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">吊牌查询</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:26px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><span class="sitemapPageIcon sitemapFolderIcon"></span><span class="sitemapPageName">基础设置</span></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="仓库设置.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">仓库设置</span></a></div></div></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="库区管理.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">库区管理</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="编辑库区.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">编辑库区</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="货位管理.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">货位管理</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="编辑货位.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">编辑货位</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:43px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><a class="sitemapPageLink" nodeurl="库管员管理.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">库管员管理</span></a></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:72px"><a class="sitemapPageLink" nodeurl="仓库权限.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">仓库权限</span></a></div></div></li></ul></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="仓库管理权限.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">仓库管理权限</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="条码管理.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">条码管理</span></a></div></div></li></ul></li><li class="sitemapNode sitemapExpandableNode"><div><div class="sitemapPageLinkContainer" style="margin-left:26px"><a class="sitemapPlusMinusLink"><span class="sitemapMinus"></span></a><span class="sitemapPageIcon sitemapFolderIcon"></span><span class="sitemapPageName">参数设置</span></div></div><ul><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="参数设置-产品.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">参数设置-产品</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="参数设置-商品.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">参数设置-商品</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="自动触发设置.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">自动触发设置</span></a></div></div></li><li class="sitemapNode sitemapLeafNode"><div><div class="sitemapPageLinkContainer" style="margin-left:55px"><a class="sitemapPageLink" nodeurl="类别顺序.html"><span class="sitemapPageIcon"></span><span class="sitemapPageName">类别顺序</span></a></div></div></li></ul></li></ul></li></ul></div></div><div id="pageNotesHost" style="display: none;"><div id="pageNotesHeader" '="" class="sitemapHeader" style=""><div id="pageNotesToolbar" class="sitemapToolbar"><div class="pluginNameHeader">NOTES</div><div class="pageNameHeader">库存报警看板</div><div class="pageButtonHeader"><a id="notesPreviousButton" title="Previous Page" class="sitemapToolbarButton prevPageButton"></a><a id="notesNextButton" title="Next Page" class="sitemapToolbarButton nextPageButton"></a><a id="footnotesButton" title="Toggle Footnotes" class="sitemapToolbarButton sitemapToolbarButtonSelected"></a></div></div></div><div id="pageNotesScrollContainer" style="height: 866px;"><div id="pageNotesContainer"><div id="pageNotesEmptyState" class="emptyStateContainer"><div class="emptyStateTitle">No notes for this page.</div><div class="emptyStateContent">Notes added in Axure RP will appear here.</div><div class="dottedDivider"></div></div><span id="pageNotesContent"></span></div></div></div><div id="debugHost" style="display: none;"><div id="debugHeader" '="" class="sitemapHeader" style=""><div id="debugToolbar" class="sitemapToolbar"><div class="pluginNameHeader">CONSOLE</div><div class="pageNameHeader">库存报警看板</div></div></div><div id="debugScrollContainer" style="height: 866px;"><div id="debugContainer"><div id="variablesContainer"><div id="variablesClearLinkContainer" class="debugLinksContainer"><a id="variablesClearLink" title="Reset Variables">Reset Variables</a></div><div id="variablesDiv"><div class="variableDiv"><span class="variableName">OnLoadVariable</span><br>(blank)</div></div></div><div class="dottedDivider"></div><div id="traceContainer"><div id="traceClearLinkContainer" class="debugLinksContainer" style="display: block;"><a id="traceClearLink" title="Clear Trace">Clear Trace</a></div><div id="traceEmptyState" class="emptyStateContainer" style="display: none;"><div class="emptyStateTitle">No interactions in the trace.</div><div class="emptyStateContent">Triggered interactions will appear here.</div><div class="dottedDivider"></div></div><div id="traceDiv"><div class="axEventBlock lastAxEvent"><div class="axTime">下午2:52:45</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:45</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:44</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:44</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:43</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:43</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:42</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:42</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:41</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:41</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:40</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:40</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:39</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:39</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:38</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:38</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:37</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:37</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:36</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:36</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:35</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:35</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:34</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:34</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:33</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:33</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:32</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:32</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:31</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnShow</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,-600) linear 15000ms</div><div class="axAction">Hide switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:31</div><div class="axLabel">switch (Rectangle)</div><div class="axEvent">OnHide</div><div class="axCase">Case 1</div><div class="axAction">Move 表格 by (0,600)</div><div class="axAction">Wait 1000 ms</div><div class="axAction">Show switch</div></div><div class="axEventBlock"><div class="axTime">下午2:52:31</div><div class="axLabel">滚动列表 (Dynamic Panel)</div><div class="axEvent">OnLoad</div><div class="axCase">Case 1</div><div class="axAction">Show switch</div></div></div></div></div></div></div><div id="feedbackHost" style="display: none;"><div id="feedbackHeader" class="feedbackHeader" style=""><div id="refreshFeedbackDiv"></div><div id="feedbackToolbar" class="feedbackToolbar"><div id="feedbackNameHeader" class="pluginNameHeader">DISCUSS</div><div id="feedbackPageNameHeader" class="pageNameHeader" title="Discuss 库存报警看板">库存报警看板</div><div id="feedbackButtonHeader" class="pageButtonHeader"><a id="feedbackButtonBack" class="feedbackToolbarButton" title="Go to Previous Page" href="http://cloud.axureshop.com/g87yly/#"></a><a id="feedbackButtonForward" class="feedbackToolbarButton" title="Go to Next Page" href="http://cloud.axureshop.com/g87yly/#"></a><div id="feedbackButtonShowHidePins" class="feedbackToolbarButton pin_on" style="margin-right: 4px;"></div></div></div></div><div id="feedbackNewIssueContainer" style=""><div id="feedbackNewIssuePin"><div id="feedbackNewIssuePinBtn" class="feedbackPinBtn">   <div class="addIcon"></div>   <span>COMMENT ON SCREEN</span></div></div><div class="feedbackDivider"></div><div id="feedbackNewIssue"><div id="feedbackTag_018124955392418762226957664177880152855928100846638418937355855973" class="feedbackEntryItem" style="z-index: 1;">   <div id="feedbackNewIssueEntry" class="">       <input type="text" value="Or add comment without a location" class="newIssueTextInputMimic" readonly="">       <div class="newIssueFeedbackEntryContainer"><table class="feedbackUserHeaderTable">   <tbody>       <tr>           <td class="commenterImgTd">               <div class="commenterImg"></div>           </td>           <td class="feedbackUserNameTd">               <div class="anonFeedbackUserName">                   Commenting as <a class="anonNameLink"></a>               </div>               <div class="axureFeedbackUserName"></div>           </td>           <td class="loginOptionsTd"><a class="loginOption">Log In</a><a class="logoutOption">Log Out</a><span>▼</span>           </td>       </tr>   </tbody></table><div class="axContextSpeechBubbleAbove anonNameChangeBubble">   <div class="anonNameChangeContainer">       <table class="anonNameChangeInfo" style="margin-bottom: 10px;">           <tbody><tr>               <td class="commenterImgTd" style="padding-right: 0;"><div class="commenterImg anonCommenterImg"></div></td>               <td style="width: 5px;"></td>               <td class="anonNameChangeSection">                   <span class="anonNameChangeDisplay"></span>                   <input type="text" class="anonNameChangeInput">               </td>           </tr></tbody>       </table>   </div></div><div class="axClearMsgBubble axureLoginBubble">   <div class="axureLoginBubbleContainer">       <span style="font-weight: bold; font-size: 10px;">Login into your Axure Share account</span>       <input type="text" name="email" class="axureEmail watermark" style="margin-top: 7px;">       <input name="password" class="axurePassword watermark">       <div class="feedbackGreenBtn">LOG IN</div>       <div class="errorMessage"></div>   </div></div>           <div class="feedbackEntryTextAreaContainer issueFeedbackEntryTextAreaContainer">               <textarea id="" class="feedbackEntryTextArea issueFeedbackEntryTextArea" rows="3" maxlength="1000"></textarea><div class="textAreaCameraContainer"><div class="cameraIcon screenshotIssueIcon" onclick="executeScreenshot(this)" title="Ctrl + Shift + 1"></div></div>           </div>       </div>   </div>   <div class="feedbackEntryItemLinks" style="display: none;">       <div class="feedbackEntryItemErrorMessage"></div>       <a class="feedbackBlueBtn feedbackEntryItemSave">POST</a>   </div></div></div></div><div id="feedbackLoadingPlaceholder" style="display: none;"><div class="feedbackIssue">   <div class="animated-background">       <div class="background-masker masker0"></div>       <div class="background-masker masker1"></div>       <div class="background-masker masker2"></div>       <div class="background-masker masker3"></div>       <div class="background-masker masker4"></div>       <div class="background-masker masker5"></div>       <div class="background-masker masker6"></div>       <div class="background-masker masker7"></div>       <div class="background-masker masker8"></div>       <div class="background-masker masker9"></div>       <div class="background-masker masker10"></div>       <div class="background-masker masker11"></div>   </div></div><div class="feedbackIssue">   <div class="animated-background">       <div class="background-masker masker0"></div>       <div class="background-masker masker1"></div>       <div class="background-masker masker2"></div>       <div class="background-masker masker3"></div>       <div class="background-masker masker4"></div>       <div class="background-masker masker5"></div>       <div class="background-masker masker6"></div>       <div class="background-masker masker7"></div>       <div class="background-masker masker8"></div>       <div class="background-masker masker9"></div>       <div class="background-masker masker10"></div>       <div class="background-masker masker11"></div>   </div></div><div class="feedbackIssue">   <div class="animated-background">       <div class="background-masker masker0"></div>       <div class="background-masker masker1"></div>       <div class="background-masker masker2"></div>       <div class="background-masker masker3"></div>       <div class="background-masker masker4"></div>       <div class="background-masker masker5"></div>       <div class="background-masker masker6"></div>       <div class="background-masker masker7"></div>       <div class="background-masker masker8"></div>       <div class="background-masker masker9"></div>       <div class="background-masker masker10"></div>       <div class="background-masker masker11"></div>   </div></div></div><div id="feedbackNoDiscussionsDiv" style="display: block;"><div class="feedbackDivider"></div><div class="noDiscussionText">   <p>No Discussions for this page.</p>   <span>Either select the button above to post to a location on the page, or use the field to post without location.   </span></div></div><div id="feedbackScrollContainer" style="height: 846px;"><div id="feedbackSavedIssues" class=""></div><div id="showResolvedIssuesBtn" style="display: none;">SHOW RESOLVED COMMENTS</div><div id="feedbackResolvedIssuesDiv" style="display: none;"><div id="hideResolvedIssuesBtn">HIDE RESOLVED COMMENTS</div><div class="feedbackDivider"></div></div></div><div id="refreshNotification">New comments available <a id="feedbackRefreshLink">Click to Refresh</a></div></div></div>
+                </div>
+                <div id="interfaceControlFrameCloseContainer">
+                    <a title="Close" id="interfaceControlFrameCloseButton" onclick="closePlayer();">CLOSE</a>
+                </div>
+            </div>
+        </div><div class="vsplitbar" unselectable="on" style="z-index: 100; position: absolute; user-select: none; top: 0px; cursor: col-resize; left: 292px; height: 894px; display: block;"><a href="javascript:void(0)" accesskey="" tabindex="0" title="vsplitbar"></a></div>
+        <div id="rightPanel" style="position: absolute; z-index: 1; left: 296px; width: 1624px; height: 894px; overflow: hidden;"><div id="existingPinsOverlay" style="left: 0px; top: 0px;">&nbsp;</div>
+            <iframe id="mainFrame" name="mainFrame" width="100%" height="100%" src="./saved_resource.html" frameborder="0" style="display: block; height: 894px;" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+        </div>
+
+    </div>
+
+    <div id="maximizePanelContainer" style="display: none;">
+        <iframe id="expandFrame" src="./expand.html" width="100%" height="100%" scrolling="no" allowtransparency="true" frameborder="0"></iframe>
+    </div>
+
+
+
+<div id="qb-sougou-search" style="display: none; opacity: 0;"><p>搜索</p><p class="last-btn">复制</p><iframe src="./saved_resource(1).html"></iframe></div></body></html>
